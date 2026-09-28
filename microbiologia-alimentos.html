@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Microbiologia dos Alimentos — 1ª prova</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#1c2230;--mute:#667085;--line:#e4e7ec;--acc:#0e8f7e;--onacc:#fff;--agar:#e0a030;--bad:#d64550;--ok:#2f9e63;--soft:#e8f5f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1419;--card:#171d25;--ink:#e8edf2;--mute:#94a0b0;--line:#252d38;--acc:#3ccbb5;--onacc:#0f1419;--agar:#f0b84f;--bad:#f0808a;--ok:#5fd398;--soft:#15302c}}
+:root[data-theme="dark"]{--bg:#0f1419;--card:#171d25;--ink:#e8edf2;--mute:#94a0b0;--line:#252d38;--acc:#3ccbb5;--onacc:#0f1419;--agar:#f0b84f;--bad:#f0808a;--ok:#5fd398;--soft:#15302c}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px);scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.2;margin:0}
+.in{max-width:760px;margin:0 auto;padding:0 18px}
+header{padding:18px 0 4px}
+header h1{font-size:clamp(24px,6vw,34px)}
+header p{color:var(--mute);margin:6px 0 0;font-size:15px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+.tabs{display:flex;gap:8px;padding:10px 0}
+.tabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font:600 14px Figtree,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 6px;cursor:pointer}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.tabs svg{width:18px;height:18px;flex:none}
+.sub{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px}
+.sub a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
+.view{display:none}.view.on{display:block}
+#topics{display:none}#topics.on{display:block}
+#topics section{display:none}#topics section.on{display:block}
+.back{display:none;margin:16px 0 0;font:600 14px Figtree,sans-serif;color:var(--acc);background:none;border:0;padding:4px 0;cursor:pointer}
+.back.on{display:inline-block}
+.intro{color:var(--mute);margin:18px 0 6px;font-size:15px}
+.card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:8px 0;cursor:pointer}
+.card.pr{border-color:var(--acc);background:var(--soft)}
+.card:hover,.card:focus-visible{border-color:var(--acc);outline:none}
+.card div{flex:1}.card b{display:block;font-weight:600;font-size:16px}
+.card span{display:block;color:var(--mute);font-size:14px;line-height:1.4;margin-top:2px}
+.card em{font-style:normal;color:var(--mute);font-size:20px}
+section{padding:22px 0 4px}
+h2{font-size:24px;margin-bottom:10px}
+h3{font-size:17px;margin:14px 0 4px}
+p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.tip{border-left:4px solid var(--agar);border-radius:4px 10px 10px 4px}
+.warn{border-left:4px solid var(--bad);border-radius:4px 10px 10px 4px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.grid .box{margin:0}
+.tag{display:inline-block;font-size:13px;font-weight:600;color:var(--acc);background:var(--soft);border-radius:6px;padding:1px 8px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px;background:var(--card);font-size:14.5px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+.steps{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:8px 0}
+.steps li{flex:1 1 140px;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--acc);border-radius:8px;padding:9px;margin:0;font-size:14.5px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.q>p{font-weight:600;margin-top:0}
+.q .o{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 11px;margin:6px 0;cursor:pointer}
+.q .o:hover:enabled,.q .o:focus-visible{border-color:var(--acc);outline:none}
+.right{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 18%,transparent)!important}
+.wrong{border-color:var(--bad)!important;background:color-mix(in srgb,var(--bad) 18%,transparent)!important}
+.q small,.gab{display:block;color:var(--mute);margin-top:6px;font-size:14.5px}
+.gab{color:var(--ink);background:var(--soft);border-radius:8px;padding:8px 11px}
+textarea{width:100%;min-height:80px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;resize:vertical}
+.btn{font:600 14px Figtree,sans-serif;background:var(--acc);color:var(--onacc);border:0;border-radius:8px;padding:8px 14px;cursor:pointer;margin:6px 6px 0 0}
+.btn.g{background:var(--ok)}.btn.r{background:var(--bad)}.btn.g,.btn.r{color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px}
+details summary{cursor:pointer;color:var(--acc);font-weight:600}
+#score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:var(--ink);color:var(--bg);border-radius:99px;padding:8px 16px;width:max-content;max-width:100%;margin:14px auto 0;font-weight:600;font-size:14px}
+footer{padding:26px 0 60px;color:var(--mute);font-size:14px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+<header><h1>Microbiologia dos Alimentos</h1></header>
+<div class="tabs" role="tablist">
+<button class="on" data-v="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>Resumo</button>
+<button data-v="sim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 13l2 2 4-4"/></svg>Simulado</button>
+</div>
+</div></div>
+
+<main class="in">
+<div class="view on" id="res">
+<div id="home"><p class="intro">Toque em um assunto para ver o resumo.</p></div>
+<button class="back" id="back">‹ Todos os assuntos</button>
+<div id="topics">
+
+<section id="hist"><h2>História da produção de alimentos</h2>
+<ul>
+<li>A produção de alimentos começou há <b>8 a 10 mil anos</b>. Antes disso, o ser humano vivia <b>caçando e coletando</b>, como nômade, seguindo os rebanhos e as estações das plantas.</li>
+<li>Com o alimento preparado e guardado, surgiram os problemas de <b>deterioração, toxicidade e transmissão de doenças</b>, sobretudo por armazenamento inadequado.</li>
+<li><b>Neolítico:</b> domesticaram plantas e animais (cevada, ervilha, lentilha, grão-de-bico, ervilhaca), fixaram-se em um lugar e formaram aldeias, depois cidades. Sobrou tempo para outras atividades além de buscar comida. Já havia melhoramento genético empírico: escolhiam os melhores grãos para replantar.</li>
+<li><b>Roma:</b> comer deitado era símbolo de distinção. O "vomitarium" para vomitar e continuar comendo é um <b>mito</b>, sem provas.</li>
+<li><b>Brasil:</b> grande território, biodiversidade, clima tropical e tecnologia (microbiologia agrícola, produtos biológicos, irrigação, melhoramento genético). É um dos maiores exportadores de alimentos.</li>
+</ul>
+<h3>Segurança alimentar</h3>
+<p>Conceito surgido na Europa na 1ª Guerra Mundial, por causa da fome. A <b>FAO</b> foi criada em <b>1945</b> e em 1948 a alimentação foi reconhecida como direito humano básico. O Dia Mundial da Alimentação é <b>16 de outubro</b>.</p>
+<p class="box tip"><b>Definição (FAO):</b> todas as pessoas, o tempo todo, com acesso físico, social e econômico a alimentos suficientes, <b>seguros e nutritivos</b>, para uma vida ativa e saudável. Ter comida não basta: uma criança que só come arroz está em insegurança alimentar.</p>
+<p><b>4 dimensões:</b> estabilidade no acesso, disponibilidade, distribuição e utilização adequada dos alimentos.</p>
+<p><b>Números do slide:</b> em 2020, 2,37 bilhões de pessoas sem dieta saudável e 811 milhões com fome (FAO). No Brasil, 116,8 milhões em insegurança alimentar e 19,1 milhões com fome (Rede Penssan).</p>
+</section>
+
+<section id="ods"><h2>ODS 2 e ODS 12</h2>
+<div class="grid">
+<div class="box"><span class="tag">ODS 2</span><h3>Fome zero e agricultura sustentável</h3><p>Acabar com todas as formas de fome e má-nutrição até 2030. Meta: sistemas sustentáveis de produção e práticas agrícolas resilientes (clima extremo, seca, inundação), que preservem o solo e os ecossistemas.</p></div>
+<div class="box"><span class="tag">ODS 12</span><h3>Consumo e produção sustentáveis</h3><p>Reduzir <b>pela metade</b> o desperdício per capita (varejo e consumidor) e as perdas na cadeia, incluindo pós-colheita. Também apoiar países em desenvolvimento em ciência e tecnologia.</p></div>
+</div></section>
+
+<section id="shelf"><h2>Shelf life (prazo de validade)</h2>
+<p>É a <b>vida útil</b>: tempo entre a produção e o consumo em que o alimento mantém segurança e qualidade. A Anvisa prevê duas formas de determinar:</p>
+<div class="grid">
+<div class="box"><h3>Análise microbiológica</h3><p>Cultiva bactérias de amostras coletadas em dias diferentes, conta quantas há (e a fração de aeróbios e anaeróbios). Mostra quando o alimento <b>deixa de ser seguro</b>.</p></div>
+<div class="box"><h3>Análise sensorial</h3><p>Um grupo de pessoas prova o alimento a cada dia e dá notas. Mostra quando ele <b>deixa de ser agradável</b>. Costuma dar validade <b>menor</b> que a microbiológica, porque textura, odor e sabor mudam antes de o alimento estar realmente estragado.</p></div>
+</div>
+<ul>
+<li><b>Fatores:</b> condições de armazenamento (temperatura, luz, umidade), composição (muito açúcar, pouca água e pH ácido duram mais) e processamento/embalagem.</li>
+<li><b>Rótulo (RDC 259/2002):</b> validade até 90 dias = dia e mês; acima de 90 dias = pode ser só mês e ano. Se exige condição especial de conservação, precisa constar (ex.: temperatura).</li>
+<li>Ausência de prazo ou venda de produto impróprio é <b>infração sanitária</b>. Quem regula é a Anvisa (Lei 9.782/99).</li>
+</ul></section>
+
+<section id="intr"><h2>Fatores intrínsecos (do alimento)</h2>
+<p>O IFST classifica assim: intrínsecos são propriedades do próprio alimento (pH, acidez, nutrientes, conservantes, matéria-prima). Extrínsecos são do ambiente. Podem ser ótimos ou limitantes para o crescimento.</p>
+<h3>1. Atividade de água (Aa = P/P₀)</h3>
+<p>Mede a água <b>disponível</b> para o microrganismo.</p>
+<div class="wrap"><table>
+<tr><th>Aa</th><th>Exemplos</th><th>O que cresce</th></tr>
+<tr><td>≥ 0,98</td><td>carne e peixe frescos, frutas, vegetais, leite</td><td>Praticamente tudo</td></tr>
+<tr><td>0,93 a 0,98</td><td>pão, queijo processado, carnes curadas, salsicha cozida</td><td>Vários</td></tr>
+<tr><td>0,85 a 0,93</td><td>carne seca, presunto cru, leite condensado</td><td>Bolores (micotoxinas) e só uma bactéria patogênica: <i>S. aureus</i></td></tr>
+<tr><td>0,60 a 0,85</td><td>frutas secas, farinhas, geleias, nozes</td><td>Sem patogênicas; só xerofílicos, osmofílicos e halofílicos (deterioração)</td></tr>
+<tr><td>&lt; 0,60</td><td>chocolate, mel, biscoito, leite em pó</td><td>Nada se multiplica, mas pode ficar viável por muito tempo</td></tr>
+</table></div>
+<h3>2. pH</h3>
+<p>O ideal é neutro (6,5 a 7,5). Bactérias toleram pouca variação; fungos e leveduras aguentam mais acidez.</p>
+<ul><li><b>Baixa acidez:</b> pH &gt; 4,5 (mais sujeitos a patogênicos e deteriorantes).</li><li><b>Ácidos:</b> 4,0 a 4,5 (leveduras, bolores, bactérias láticas, alguns <i>Bacillus</i>).</li><li><b>Muito ácidos:</b> &lt; 4,0 (quase só bolores e leveduras).</li></ul>
+<p>Cortes: 4,5 = mínimo do <i>Clostridium botulinum</i> (crescer e produzir toxina); 4,0 = mínimo da maioria das bactérias.</p>
+<h3>3. Potencial de óxido-redução (Eh)</h3>
+<p>Aeróbios precisam de Eh positivo (maioria dos bolores, leveduras oxidativas e bactérias deteriorantes como <i>Pseudomonas</i>). Anaeróbios precisam de Eh baixo.</p>
+<h3>4. Nutrientes e 5. Antimicrobianos naturais</h3>
+<p>Microrganismos precisam de fonte de carbono, nitrogênio (aminoácidos, proteínas), vitaminas e sais minerais. Barreiras naturais: casca (ovos, nozes, frutas) e substâncias como <b>lisozima</b> na clara do ovo (rompe parede celular), ácido benzoico na amora, eugenol no cravo, aldeído cinâmico na canela, lactenina no leite.</p>
+</section>
+
+<section id="extr"><h2>Fatores extrínsecos (do ambiente)</h2>
+<h3>1. Temperatura</h3>
+<p>É provavelmente o fator ambiental mais importante. Acima da máxima, as proteínas desnaturam e o microrganismo morre.</p>
+<div class="wrap"><table>
+<tr><th>Grupo</th><th>Temperatura ótima</th><th>Obs.</th></tr>
+<tr><td>Psicrófilos</td><td>10 a 15 °C</td><td>crescem na geladeira</td></tr>
+<tr><td>Mesófilos</td><td>25 a 40 °C</td><td>a grande maioria em alimentos</td></tr>
+<tr><td>Termófilos</td><td>45 a 60 °C</td><td>gêneros <i>Bacillus</i> e <i>Clostridium</i></td></tr>
+<tr><td>Hipertermófilos</td><td>&gt; 60 °C</td><td></td></tr>
+</table></div>
+<h3>2. Oxigênio</h3>
+<p>Há aeróbios (crescem na superfície, formando película), anaeróbios (não toleram O₂) e <b>anaeróbios facultativos</b>, que vivem com ou sem O₂ e são a maioria das espécies de interesse na indústria de alimentos.</p>
+<h3>3. Umidade relativa (UR)</h3>
+<p>Interfere direto na Aa (UR = Aa × 100). Alimento com Aa baixa em ambiente de UR alta absorve água, a Aa sobe e pode deteriorar.</p>
+<h3>4. Composição gasosa</h3>
+<p>Atmosfera modificada troca parte do O₂ por outros gases (vácuo, N₂, CO₂). CO₂ inibe o crescimento e, na carne, barra as Gram-negativas e deixa <i>Lactobacillus</i> dominar. Ozônio não é indicado para alimentos muito gordurosos (acelera a rancificação).</p>
+<p class="box tip"><b>Teoria dos obstáculos (Leistner):</b> a conservação vem da combinação de vários fatores (temperatura, Aa, pH, potencial redox, conservantes, atmosfera modificada, microrganismos competidores). Juntos, potencializam o efeito de cada um.</p>
+</section>
+
+<section id="det"><h2>Deteriorantes x patogênicos</h2>
+<div class="wrap"><table>
+<tr><th></th><th>Deteriorantes</th><th>Patogênicos</th></tr>
+<tr><td>Efeito</td><td>Mudam textura, sabor, odor e aparência</td><td>Quase não alteram nada</td></tr>
+<tr><td>Dá para perceber?</td><td>Sim, não se disfarçam</td><td>Não, se disfarçam melhor. O surto ocorre mesmo sem mudança de sabor ou odor</td></tr>
+<tr><td>Consequência</td><td>Perda de qualidade e desperdício</td><td>Doença (DTA)</td></tr>
+</table></div>
+<ul>
+<li><b>Bactérias:</b> deterioram usando carboidratos, substâncias nitrogenadas e lipídios.</li>
+<li><b>Leveduras:</b> a mesma espécie pode ser útil num produto (cerveja, vinho) e deteriorante em outro (suco de fruta), como <i>Saccharomyces</i>.</li>
+<li><b>Bolores:</b> crescem de pH 2 a 9, resistem à desidratação, exigem O₂ e formam colônias visíveis; alguns produzem micotoxinas.</li>
+<li><b>Enzimas:</b> proteínas sem vida própria que agem como catalisadores e também deterioram.</li>
+<li><b>Enlatados:</b> "esterilização comercial" não é esterilidade absoluta. Problemas: subprocessamento térmico, vazamento, corrosão (estufamento por hidrogênio) e enchimento excessivo.</li>
+</ul></section>
+
+<section id="perigo"><h2>Perigos (fatores de risco)</h2>
+<p>Perigo é qualquer condição ou contaminante que pode causar mal ou dano ao consumidor. São controlados pelo <b>APPCC</b> e pelas <b>Boas Práticas</b>.</p>
+<div class="grid">
+<div class="box"><span class="tag">Biológico</span><p>Bactérias, fungos, vírus e parasitas. Bactérias patogênicas e suas toxinas causam a maioria dos surtos. Ocorre <b>DTA</b>.</p></div>
+<div class="box"><span class="tag">Químico</span><p>Produtos de limpeza, pesticidas, herbicidas, toxinas fúngicas, antibióticos, anabolizantes, aditivos tóxicos, lubrificantes, tintas.</p></div>
+<div class="box"><span class="tag">Físico</span><p>Corpos estranhos: vidro, metal, madeira, plástico de embalagem, papel, osso. Podem ferir a boca ou quebrar dente.</p></div>
+</div>
+<p><b>Contaminação cruzada:</b> transferência de patógenos entre materiais, superfícies de contato e alimentos (ex.: alimento cozido recontaminado). <b>Causas:</b> falha em processos, insumos ou equipamentos contaminados, falha humana e higienização ineficiente.</p>
+</section>
+
+<section id="dta"><h2>DTA — Doenças Transmitidas por Alimentos</h2>
+<p>Causadas por alimento ou água contaminados por microrganismos patogênicos, substâncias químicas ou toxinas. Existem mais de 250 tipos. As <b>bactérias</b> são o grupo com maior incidência. Prevenção: Boas Práticas (RDC 216, RDC 331 e IN 60 da Anvisa).</p>
+<h3>As 4 etapas</h3>
+<ol class="steps">
+<li><b>Contaminação</b><br>patógeno viável chega pela matéria-prima, pessoal, superfícies, insetos, roedores ou ar</li>
+<li><b>Multiplicação</b><br>depende do alimento, do microrganismo, da temperatura e do tempo. Faixa crítica: 20 a 50 °C. Seguro: abaixo de 10 °C (ideal até 4 °C) ou acima de 60 °C</li>
+<li><b>Sobrevivência</b><br>não esporulados morrem na cocção. Falha na cocção, na sanitização ou no reaquecimento deixa sobreviver</li>
+<li><b>Ingestão</b><br>idosos, crianças e pessoas debilitadas são mais suscetíveis</li>
+</ol>
+<h3>Três formas de DTA</h3>
+<div class="wrap"><table>
+<tr><th>Tipo</th><th>Como acontece</th><th>Exemplos</th></tr>
+<tr><td><b>Infecção</b></td><td>Ingere o microrganismo vivo, ele se multiplica no intestino e invade mucosa ou tecidos</td><td><i>Salmonella</i>, vírus da hepatite A</td></tr>
+<tr><td><b>Intoxicação</b></td><td>Ingere a toxina que o microrganismo já produziu no alimento. Não precisa da célula viva</td><td><i>S. aureus</i>, <i>C. botulinum</i></td></tr>
+<tr><td><b>Toxinfecção</b></td><td>Ingere o microrganismo vivo e ele produz ou libera a toxina depois de ingerido, no intestino</td><td><i>C. perfringens</i>, <i>B. cereus</i> (diarreica)</td></tr>
+</table></div>
+</section>
+
+<section id="micro"><h2>Análise microbiológica e indicadores</h2>
+<ul>
+<li><b>Microrganismos indicadores:</b> mostram contaminação de origem fecal, provável presença de patógenos, deterioração potencial ou condições sanitárias inadequadas.</li>
+<li><b>Indicadores fecais:</b> coliformes a 45 °C, <i>E. coli</i> e <i>Clostridium perfringens</i>.</li>
+<li><b>Coliformes totais:</b> família Enterobacteriaceae (<i>Escherichia, Klebsiella, Enterobacter, Citrobacter</i>). <b>Coliformes fecais (termotolerantes):</b> <i>E. coli</i> e algumas cepas dos outros gêneros. <b>Falta de higiene faz as enterobactérias subirem.</b></li>
+<li><b>Meios de cultura:</b> permitem crescer microrganismos de forma <b>artificial</b> no laboratório. São preparados para <b>selecionar</b> o tipo de microrganismo que se quer estudar.</li>
+<li><b>Parâmetros (Anvisa):</b> mesófilas totais, coliformes, coliformes fecais, <i>Salmonella</i>, clostrídio sulfito redutor, <i>S. aureus</i>, bolores e leveduras, <i>B. cereus</i>. Também se avaliam aspecto, cor e odor.</li>
+<li><b>Como se faz:</b> microbiologia clássica (cultivo) ou sequenciamento de DNA, que também detecta fraudes. Produtores, restaurantes e hospitais devem fazer análises periódicas em laboratório habilitado.</li>
+</ul>
+<h3>Curva de crescimento (extra)</h3>
+<p><b>Lag</b> (adaptação; quanto maior, melhor para conservar) → <b>Log/exponencial</b> (Nt = N₀ · 2ⁿ, com n = t/tg, tg = tempo de geração) → <b>Estacionária</b> (nascimentos = mortes) → <b>Declínio</b> (faltam nutrientes, sobram toxinas).</p>
+</section>
+</div></div>
+
+<div class="view" id="sim">
+<section><h2>Simulados</h2>
+<div id="shome"><p class="intro">Escolha um assunto ou faça o simulado prova, que mistura tudo. Cada simulado tem 10 questões: 8 fechadas e 2 abertas.</p><div id="scards"></div></div>
+<div id="run" style="display:none">
+<button class="back on" id="sback">‹ Todos os simulados</button>
+<h3 id="stitle" style="margin:6px 0 0"></h3>
+<div id="slist"></div>
+<div id="score" aria-live="polite">0 / 10</div>
+<p><button class="btn" id="nsim">Refazer</button></p>
+</div>
+</section>
+</div>
+</main>
+<footer><div class="in">Baseado nos slides das Aulas 1 a 7 da profa. Maria Clara.</div></footer>
+
+<script>
+// fechadas: [tema, pergunta, CORRETA, errada, errada, errada, explicação]
+var C=[
+["ODS","O ODS 2 trata de:","Fome zero e agricultura sustentável","Consumo e produção sustentáveis","Água potável e saneamento","Saúde e bem-estar","Objetivo 2 = fome zero. O de consumo e produção sustentáveis é o 12."],
+["ODS","Uma das metas do ODS 12 é:","Reduzir pela metade o desperdício de alimentos per capita","Zerar a exportação de alimentos","Aumentar o uso de agrotóxicos","Eliminar a agricultura","Também inclui reduzir perdas na cadeia, inclusive pós-colheita."],
+["História","A produção de alimentos começou há cerca de:","8 a 10 mil anos","800 anos","80 mil anos","2 mil anos","Antes disso, o ser humano só caçava e coletava."],
+["História","O que a domesticação de plantas e animais provocou?","O ser humano deixou de ser nômade e formou aldeias","Fim das doenças de origem alimentar","Fim da agricultura","Aumento da caça","Fixar-se deu origem às aldeias e depois às cidades."],
+["História","Segundo a FAO, há segurança alimentar quando todos têm acesso a alimentos:","Suficientes, seguros e nutritivos","Baratos e industrializados","Apenas em quantidade suficiente","Somente importados","Não basta ter comida: precisa ser segura e nutritiva."],
+["História","Qual NÃO é uma das 4 dimensões da segurança alimentar?","Exportação","Estabilidade","Disponibilidade","Utilização","São: estabilidade, disponibilidade, distribuição e utilização."],
+["Shelf life","Por que a validade pela análise sensorial costuma ser MENOR que a microbiológica?","Textura, odor e sabor mudam antes de o alimento estar estragado","Porque conta bactérias","Porque usa cultura em placas","Porque ignora o sabor","A sensorial mostra quando deixa de ser agradável; a micro, quando deixa de ser seguro."],
+["Shelf life","Alimento com validade de até 90 dias deve trazer no rótulo:","Dia e mês","Só o ano","Só o mês","Nada","Acima de 90 dias pode ser só mês e ano (RDC 259)."],
+["Intrínsecos","Qual é um fator intrínseco?","Atividade de água","Temperatura de armazenamento","Umidade relativa do ambiente","Composição gasosa","Aa, pH, nutrientes e antimicrobianos são do alimento."],
+["Intrínsecos","Alimento de baixa acidez tem pH:","Acima de 4,5","Abaixo de 4,0","Entre 4,0 e 4,5","Igual a 2,0","4,5 é o pH mínimo do C. botulinum; abaixo de 4,0 quase só bolores e leveduras crescem."],
+["Intrínsecos","Abaixo de Aa 0,60, os microrganismos:","Não se multiplicam, mas podem ficar viáveis por muito tempo","Se multiplicam rapidamente","Morrem imediatamente","Produzem mais toxinas","Ex.: chocolate, mel, leite em pó."],
+["Intrínsecos","Qual a única bactéria patogênica que cresce entre Aa 0,93 e 0,85?","Staphylococcus aureus","Salmonella","Escherichia coli","Listeria","Nessa faixa também crescem bolores produtores de micotoxinas."],
+["Intrínsecos","A clara do ovo tem lisozima, que:","Destrói a parede celular das bactérias","Aumenta o pH","Fornece carbono","Produz toxinas","É um constituinte antimicrobiano natural."],
+["Extrínsecos","A maioria dos microrganismos de importância em alimentos é:","Mesófila (25 a 40 °C)","Psicrófila","Termófila","Hipertermófila","Termófilos (45 a 60 °C) incluem Bacillus e Clostridium."],
+["Extrínsecos","Alimento de Aa baixa em ambiente de UR alta tende a:","Absorver umidade e ter a Aa aumentada","Perder água e ficar mais seco","Não mudar","Esterilizar","Por isso o armazenamento importa. UR = Aa × 100."],
+["Extrínsecos","A teoria dos obstáculos de Leistner diz que:","A conservação vem da combinação de vários fatores","Só a temperatura conserva","Só o pH conserva","Obstáculos aumentam a deterioração","Combinar barreiras potencializa o efeito de cada uma."],
+["Extrínsecos","Atmosfera rica em CO₂ na carne favorece:","Lactobacillus, inibindo Gram-negativas","Pseudomonas","Bolores","Salmonella","O CO₂ barra as Gram-negativas."],
+["Deteriorantes","Qual grupo se 'disfarça' melhor no alimento?","Patogênicos","Deteriorantes","Nenhum","Todos igualmente","Deteriorantes mudam sabor, odor e textura."],
+["Deteriorantes","A deterioração por bolores é percebida por:","Crescimento visível de colônias na superfície","Ausência de mudança","Só pelo pH","Só no laboratório","Alguns ainda produzem micotoxinas."],
+["Perigos","Um pedaço de vidro no alimento é perigo:","Físico","Químico","Biológico","Sensorial","Corpos estranhos são físicos."],
+["Perigos","Resíduo de pesticida no alimento é perigo:","Químico","Físico","Biológico","Térmico","Também: produtos de limpeza, antibióticos, aditivos tóxicos."],
+["Perigos","Contaminação cruzada é:","Transferência de patógenos entre materiais, superfícies e alimentos","Cozimento inadequado","Falta de rótulo","Uso de conservantes","Ex.: tábua ou utensílio usado em cru e depois em pronto."],
+["DTA","Ingerir Salmonella viva que se multiplica no intestino e invade tecidos é:","Infecção","Intoxicação","Toxinfecção","Alergia","Infecção = multiplicação do patógeno no organismo."],
+["DTA","Toxina do S. aureus já formada no alimento causa:","Intoxicação","Infecção","Toxinfecção","Contaminação cruzada","Intoxicação: a toxina já está no alimento."],
+["DTA","C. perfringens e B. cereus (forma diarreica) causam:","Toxinfecção","Intoxicação","Infecção","Alergia","Produzem/liberam toxina no intestino, depois de ingeridos."],
+["DTA","A faixa de temperatura mais crítica para multiplicação de patógenos é:","20 a 50 °C","0 a 4 °C","Acima de 60 °C","Abaixo de 10 °C","Seguro: abaixo de 10 °C (ideal até 4) ou acima de 60 °C."],
+["DTA","Qual NÃO é etapa da DTA?","Pasteurização","Contaminação","Multiplicação","Ingestão","São: contaminação, multiplicação, sobrevivência e ingestão."],
+["Análise micro","Qual é indicador de contaminação fecal?","Escherichia coli","Vitamina C","Bolores","Lactobacillus","Também coliformes a 45 °C e C. perfringens."],
+["Análise micro","Falta de higiene tende a aumentar a contagem de:","Enterobactérias","Vitaminas","Fibras","Antioxidantes","São indicadoras de falha de higiene."],
+["Análise micro","Meios de cultura são:","Artificiais e preparados para selecionar o tipo de microrganismo","Naturais e iguais para todos","Só para vírus","Um tipo de embalagem","Feitos em laboratório, conforme o que se quer isolar."],
+["Shelf life","Quem é responsável por regulamentar e fiscalizar produtos que envolvem risco à saúde pública, como embalagens de alimentos?","Anvisa","FAO","CDC","Rede Penssan","Atribuição da Anvisa, pelo artigo 8º da Lei 9.782/99."],
+["Intrínsecos","O pH mínimo para multiplicação e produção de toxina do Clostridium botulinum é:","4,5","4,0","6,5","7,5","Esse valor é a base para separar alimentos de baixa acidez dos ácidos."],
+["Intrínsecos","Aeróbios, como a maioria dos bolores e as Pseudomonas, precisam de:","Eh (potencial redox) positivo","Eh baixo","Ausência total de nutrientes","pH abaixo de 2","Anaeróbios é que exigem Eh baixo."],
+["Extrínsecos","Os microrganismos anaeróbios facultativos:","Vivem com ou sem oxigênio e são a maioria das espécies de interesse na indústria","Só vivem sem oxigênio","Só vivem na superfície do alimento","Morrem em qualquer temperatura","Os aeróbios estritos crescem na superfície formando película."],
+["Extrínsecos","Atmosfera modificada é:","Substituição total ou parcial do oxigênio por outros gases na embalagem","Uso de sal","Congelamento rápido","Adição de açúcar","Ex.: vácuo ou combinações de O₂, N₂ e CO₂."],
+["Deteriorantes","Os bolores crescem em uma faixa de pH de:","2,0 a 9,0","6,5 a 7,5","4,0 a 4,5","Só acima de 9","Resistem bem à desidratação e exigem oxigênio."],
+["Perigos","Os perigos em alimentos são controlados pelo sistema:","APPCC, com as Boas Práticas como pré-requisito","Somente pela análise sensorial","Pelo rótulo do produto","Pela pasteurização apenas","Os perigos são classificados em biológicos, químicos e físicos."],
+["DTA","Os microrganismos patogênicos não esporulados são destruídos:","Na temperatura de cocção","Na geladeira","Em ambiente de UR alta","Com o reaquecimento a 30 °C","Falha na cocção ou na sanitização permite a sobrevivência."],
+["DTA","No caso de manutenção a quente, a temperatura segura é:","Acima de 60 °C","Entre 20 e 50 °C","Abaixo de 10 °C","Em torno de 37 °C","Na manutenção a frio: abaixo de 10 °C, de preferência até 4 °C."],
+["Análise micro","Qual dos itens abaixo é um parâmetro da análise microbiológica citado nos slides?","Bactérias mesófilas totais","Teor de açúcar","Cor da embalagem","Peso do produto","Também: coliformes, Salmonella, S. aureus, bolores e leveduras, B. cereus."],
+["ODS","Quantos dos 17 ODS os slides citam como apoiados por melhorias no sistema agroalimentar?","Dois: o ODS 2 e o ODS 12","Um só","Cinco","Todos os 17","O ODS 2 (Fome Zero e Agricultura Sustentável) e o ODS 12 (Consumo e Produção Sustentáveis)."],
+["ODS","As metas do ODS 2 e do ODS 12 citadas nos slides têm prazo até:","2030","2025","2040","2050","Ambos falam em metas até 2030."],
+["ODS","A meta do ODS 12 sobre desperdício mira os níveis de:","Varejo e consumidor","Somente o produtor rural","Apenas a exportação","Só a indústria","Também inclui as perdas ao longo das cadeias de produção e abastecimento, com as pós-colheita."],
+["ODS","Uma das metas do ODS 2 é implementar práticas agrícolas:","Resilientes, que mantêm ecossistemas e ajudam na adaptação ao clima","Que aumentem o uso de agrotóxicos","Que dispensem o cuidado com o solo","Voltadas só à exportação","Ela fala em resistência a seca, inundação e clima extremo, melhorando a qualidade da terra e do solo."],
+["ODS","O ODS 2 pretende acabar com:","Todas as formas de fome e má-nutrição","Só a desnutrição infantil","Somente o desperdício","A agricultura familiar","Garantir que todos tenham acesso suficiente a alimentos nutritivos."],
+["ODS","O ODS 12 também prevê apoiar países em desenvolvimento a:","Fortalecer capacidades científicas e tecnológicas para padrões mais sustentáveis","Reduzir a produção de alimentos","Importar mais alimentos","Aumentar as perdas pós-colheita","É uma meta de apoio à mudança para produção e consumo mais sustentáveis."],
+["História","Em que contexto o termo 'segurança alimentar' começou a ser usado, segundo os slides?","Na Europa, durante a 1ª Guerra Mundial, com o aumento da fome","Na Revolução Industrial","Na pandemia de 2020","Na Roma Antiga","Depois disso se tornou recorrente e levou à criação da FAO."],
+["História","A FAO foi criada em:","1945","1918","1948","2004","Em 1948 veio a Declaração Universal dos Direitos Humanos, que reconheceu a alimentação como direito básico."],
+["História","O Dia Mundial da Alimentação é comemorado em:","16 de outubro","1º de maio","5 de junho","7 de abril","Foi instituído pela FAO, com base em nutrição, produção de alimentos, ambiente e qualidade de vida."],
+["História","O 'vomitarium' romano, para vomitar e continuar comendo, é:","Um mito, sem provas","Um fato comprovado","Uma prática só dos soldados","Um tipo de prato","Comer deitado é que era símbolo de distinção."],
+["Shelf life","Na análise microbiológica do shelf life, as amostras:","São coletadas com um dia de diferença e cultivadas para contar bactérias","São provadas por um grupo de pessoas","São só observadas a olho nu","São congeladas sem análise","Assim se descobre quando o alimento perde a segurança."],
+["Shelf life","Na análise sensorial, o alimento é:","Experimentado a cada dia por um grupo que dá notas","Cultivado em placas","Sequenciado por DNA","Avaliado só pelo pH","Ela mostra o ponto em que deixa de ser apetitoso."],
+["Shelf life","Qual expressão o rótulo pode usar para declarar a validade?","Consumir antes de","Bom até quando der","Aprovado pelo mercado","Uso livre","Outras: válido até, validade, vencimento, val., vto e venc."],
+["Shelf life","Alimentos com muito açúcar, pouca água e pH ácido tendem a ter vida útil:","Mais longa","Mais curta","Igual à dos demais","Nula","Já os de muita água e nutrientes são mais suscetíveis à deterioração microbiológica."],
+["Shelf life","Uma vantagem do shelf life para o consumidor é:","Garantir segurança alimentar e permitir planejar refeições e compras","Aumentar o desperdício","Dispensar o rótulo","Eliminar a refrigeração","Também mantém sabor, textura e aparência por mais tempo."],
+["Intrínsecos","Qual constituinte antimicrobiano age principalmente contra fungos na amora?","Ácido benzoico","Lisozima","Eugenol","Aldeído cinâmico","Lisozima é do ovo, eugenol do cravo e aldeído cinâmico da canela."],
+["Extrínsecos","Acima da temperatura máxima de crescimento ocorre:","Desnaturação das proteínas estruturais e morte","Aumento da multiplicação","Só formação de esporos","Queda do pH","A temperatura ótima é a da multiplicação mais rápida."],
+["Extrínsecos","Atmosferas com cerca de 10% de CO₂ são usadas para conservar:","Frutas como pêras, maçãs e pêssegos","Óleos e gorduras","Leite em pó","Carnes curadas","Há competição com o etileno."],
+["Deteriorantes","A mesma espécie de levedura (Saccharomyces) pode:","Ser útil na cerveja e deteriorante em suco de fruta","Só deteriorar","Só ser útil","Ser sempre patogênica","Depende do tipo de alimento e das suas características."],
+["Deteriorantes","As enzimas envolvidas na deterioração são:","Proteínas sem vida própria que agem como catalisadores","Bactérias esporuladas","Fungos filamentosos","Toxinas","Agem junto com a atividade bacteriana e sua ação é específica para cada reação."],
+["Deteriorantes","Alimento enlatado comercialmente estéril:","Não tem microrganismos capazes de deteriorar, mas não é esterilidade absoluta","Não tem nenhuma célula viva","Estraga em qualquer condição","É o mesmo que pasteurizado","Células viáveis ainda podem ser recuperadas."],
+["Deteriorantes","A corrosão interna da lata, com liberação de hidrogênio e estufamento, é problema:","Químico","Físico","Microbiológico","Sensorial","O enchimento excessivo é problema físico."],
+["Deteriorantes","Quanto à suscetibilidade à deterioração, os alimentos se dividem em:","Perecíveis, semi-perecíveis e estáveis","Ácidos e básicos","Crus e cozidos","Frescos e congelados","Baseia-se na composição final, no processamento e no armazenamento."],
+["Perigos","Qual é exemplo de perigo biológico?","Bactérias, fungos, vírus e parasitas","Vidro e metal","Pesticidas","Produtos de limpeza","Os biológicos causam a maioria dos surtos, sobretudo as bactérias patogênicas e suas toxinas."],
+["Perigos","Toxinas fúngicas e antibióticos são perigos:","Químicos","Físicos","Biológicos","Térmicos","Também: pesticidas, herbicidas, aditivos tóxicos e produtos de limpeza."],
+["Perigos","Qual destas foi citada como causa de contaminação?","Higienização ineficiente e falha humana","Embalagem transparente","Freezer com baixa temperatura","Rótulo em letra grande","Também: falhas em processos e insumos ou equipamentos contaminados."],
+["Perigos","Um alimento cozido que recebe patógenos de novo sofreu:","Contaminação cruzada","Esterilização comercial","Pasteurização","Sanitização","Ocorre por superfícies, utensílios ou alimentos crus."],
+["DTA","Qual grupo microbiano tem a maior incidência nas DTAs?","Bactérias","Protozoários","Leveduras","Bolores","Por sua grande diversidade e virulência."],
+["Análise micro","O habitat exclusivo de um indicador ideal de contaminação fecal é:","O trato intestinal do homem e de animais de sangue quente","O solo","A água doce","A superfície das frutas","Também deve estar em grande número nas fezes e resistir ao ambiente extra-intestinal."],
+["Análise micro","Os coliformes totais pertencem à família:","Enterobacteriaceae","Bacillaceae","Lactobacillaceae","Clostridiaceae","Gêneros: Escherichia, Klebsiella, Enterobacter e Citrobacter."],
+["Análise micro","O sequenciamento de DNA na análise de alimentos também permite:","Identificar fraudes","Medir o pH","Contar mesófilos em placa","Dispensar a Anvisa","Detecta bactérias patogênicas ou deteriorantes em todo tipo de alimento."],
+["Análise micro","Quem deve fazer análises microbiológicas periódicas em laboratório habilitado pela Anvisa?","Produtores de alimentos, restaurantes e hospitais","Só indústrias exportadoras","Apenas os consumidores","Ninguém","Faz parte do controle de qualidade e da prevenção de DTA."]
+];
+// abertas: [tema, pergunta, gabarito]
+var O=[
+["História","Explique como o surgimento da agricultura mudou a vida humana e o que isso trouxe de problema para os alimentos.","Ao domesticar plantas e animais, o ser humano deixou de ser nômade, fixou-se, formou aldeias e cidades e teve tempo para outras atividades. Com alimento preparado e armazenado, surgiram a deterioração, a toxicidade e a transmissão de doenças, sobretudo por armazenamento inadequado."],
+["ODS","Diferencie ODS 2 e ODS 12.","ODS 2: fome zero e agricultura sustentável, acabar com a fome e a má-nutrição até 2030 com produção sustentável. ODS 12: consumo e produção sustentáveis, reduzir pela metade o desperdício per capita e as perdas na cadeia, inclusive pós-colheita."],
+["Shelf life","O que é shelf life e como se determina? Compare análise sensorial e microbiológica.","Shelf life é o tempo em que o alimento mantém segurança e qualidade entre produção e consumo. Microbiológica: cultura e contagem de bactérias em amostras de dias diferentes, mostra quando deixa de ser seguro. Sensorial: provadores dão notas, mostra quando deixa de ser agradável, e costuma dar prazo menor."],
+["Intrínsecos","Diferencie fatores intrínsecos e extrínsecos e dê exemplos de cada.","Intrínsecos são do alimento: atividade de água, pH, potencial redox, nutrientes e antimicrobianos naturais. Extrínsecos são do ambiente: temperatura, oxigênio, umidade relativa e composição gasosa."],
+["Extrínsecos","O que é a teoria dos obstáculos de Leistner?","Estuda a interação entre fatores intrínsecos e extrínsecos (temperatura, Aa, pH, potencial redox, conservantes, atmosfera modificada, microrganismos competidores). A ação conjunta de barreiras potencializa a conservação, aumenta a vida útil e impede deterioração e doenças."],
+["Deteriorantes","Diferencie microrganismos deteriorantes de patogênicos.","Deteriorantes alteram textura, sabor, odor e aparência, então não se disfarçam e causam perda de qualidade. Patogênicos quase não alteram o alimento, se disfarçam melhor e causam doença (DTA)."],
+["Perigos","Cite os três tipos de perigo em alimentos e dê exemplos.","Biológico: bactérias, fungos, vírus e parasitas (causam DTA). Químico: pesticidas, produtos de limpeza, toxinas fúngicas, antibióticos. Físico: vidro, metal, madeira, plástico, osso."],
+["DTA","Diferencie infecção, intoxicação e toxinfecção, com exemplos.","Infecção: ingere o microrganismo vivo, que se multiplica no intestino e invade tecidos (Salmonella). Intoxicação: ingere a toxina já formada no alimento (S. aureus, C. botulinum). Toxinfecção: ingere o microrganismo, que produz ou libera a toxina no intestino (C. perfringens, B. cereus diarreica)."],
+["DTA","Quais são as 4 etapas da DTA? Explique cada uma.","Contaminação (patógeno chega ao alimento), multiplicação (faixa crítica 20 a 50 °C), sobrevivência (resiste à cocção ou sanitização falha) e ingestão (idosos, crianças e debilitados são mais suscetíveis)."],
+["Análise micro","O que são meios de cultura e por que a E. coli e as enterobactérias são importantes na análise microbiológica?","Meios de cultura são artificiais e preparados para selecionar o tipo de microrganismo a ser cultivado. E. coli e enterobactérias (coliformes) são indicadores de contaminação fecal e de falha de higiene, ligados a DTA."],
+["História","O que é segurança alimentar segundo a FAO e quais são as 4 dimensões?","Todas as pessoas, o tempo todo, com acesso físico, social e econômico a alimentos suficientes, seguros e nutritivos, para uma vida ativa e saudável. Dimensões: estabilidade no acesso, disponibilidade, distribuição e utilização adequada dos alimentos."],
+["ODS","Explique a meta do ODS 12 sobre desperdício e por que o shelf life ajuda a alcançá-la.","A meta é reduzir pela metade o desperdício per capita no varejo e no consumidor e diminuir as perdas na cadeia, inclusive pós-colheita, até 2030. O shelf life prolonga a vida útil, dá mais tempo para distribuição e venda e reduz o desperdício e as perdas financeiras."],
+["Shelf life","Cite fatores que afetam o tempo de prateleira e formas de assegurar o shelf life de um produto.","Fatores: condições de armazenamento (temperatura, luz, umidade), composição (açúcar, água, pH) e processamento e embalagem. Para assegurar: embalagem adequada, cuidado na logística, rotulação clara, armazenamento adequado e seguir o guia de shelf life da Anvisa."],
+["Intrínsecos","Como os alimentos se classificam pelo pH e por que os valores 4,5 e 4,0 são usados?","Baixa acidez: pH acima de 4,5. Ácidos: entre 4,0 e 4,5. Muito ácidos: abaixo de 4,0. O 4,5 é o pH mínimo de multiplicação e produção de toxina do C. botulinum, e o 4,0 é o mínimo para a grande maioria das bactérias. Alimentos de baixa acidez são os mais sujeitos à multiplicação microbiana."],
+["Extrínsecos","Classifique os microrganismos pela temperatura ótima e diga o que ocorre acima da temperatura máxima.","Psicrófilos: 10 a 15 °C. Mesófilos: 25 a 40 °C, a maioria em alimentos. Termófilos: 45 a 60 °C (Bacillus e Clostridium). Hipertermófilos: acima de 60 °C. Acima da máxima, as proteínas estruturais desnaturam e o microrganismo morre."],
+["Deteriorantes","Compare a deterioração causada por bactérias, leveduras e bolores.","Bactérias usam carboidratos, substâncias nitrogenadas e lipídios, alterando química, física e sensorialmente o alimento. Leveduras podem ser úteis ou deteriorantes conforme o alimento (Saccharomyces). Bolores crescem de pH 2 a 9, resistem à desidratação, precisam de oxigênio, formam colônias visíveis e podem produzir micotoxinas."],
+["Perigos","O que é contaminação cruzada e quais causas de contaminação foram citadas?","É a transferência de microrganismos patogênicos entre materiais de produção, superfícies de contato e alimentos. Causas: falhas em processos ou protocolos, materiais, insumos ou equipamentos contaminados, falha humana e higienização ineficiente."],
+["Análise micro","Cite requisitos de um indicador ideal de contaminação fecal e exemplos de indicadores fecais.","Deve ter como habitat exclusivo o intestino de animais de sangue quente, ocorrer em grande número nas fezes, resistir ao ambiente extra-intestinal, estar presente quando o patógeno estiver e ser fácil de detectar. Exemplos: coliformes a 45 °C, E. coli e Clostridium perfringens."]
+];
+var $=function(i){return document.getElementById(i)};
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x)e.textContent=x;return e}
+// abas
+document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){
+document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
+document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===b.dataset.v)});
+if(b.dataset.v==='res')volta();if(b.dataset.v==='sim')lista();window.scrollTo(0,0)}});
+
+// home: lista de assuntos
+var T=[["hist","História e segurança alimentar","Da caça e coleta à agricultura no Neolítico, FAO e as 4 dimensões da segurança alimentar."],
+["ods","ODS 2 e ODS 12","Fome zero e consumo e produção sustentáveis: metas até 2030."],
+["shelf","Shelf life","Prazo de validade: análise sensorial x microbiológica e regras do rótulo."],
+["intr","Fatores intrínsecos","Do alimento: Aa, pH, potencial redox, nutrientes e antimicrobianos naturais."],
+["extr","Fatores extrínsecos","Do ambiente: temperatura, oxigênio, umidade, gases e teoria dos obstáculos."],
+["det","Deteriorantes x patogênicos","Quem estraga o alimento e quem se disfarça."],
+["perigo","Perigos","Biológico, químico e físico, e contaminação cruzada."],
+["dta","DTA","Infecção, intoxicação, toxinfecção e as 4 etapas."],
+["micro","Análise microbiológica","Indicadores, coliformes, E. coli, meios de cultura e curva de crescimento."]];
+function abre(id){$('home').style.display='none';$('topics').classList.add('on');$('back').classList.add('on');
+document.querySelectorAll('#topics section').forEach(function(x){x.classList.toggle('on',x.id===id)});window.scrollTo(0,0)}
+function volta(){$('home').style.display='block';$('topics').classList.remove('on');$('back').classList.remove('on');window.scrollTo(0,0)}
+T.forEach(function(t){var b=el('button','card');var d=el('div');d.appendChild(el('b','',t[1]));d.appendChild(el('span','',t[2]));
+b.appendChild(d);b.appendChild(el('em','','›'));b.onclick=function(){abre(t[0])};$('home').appendChild(b)});
+$('back').onclick=volta;
+// simulados
+var S=[["Prova","Simulado Prova","Todos os assuntos misturados"],
+["História","Simulado História","Neolítico, segurança alimentar e FAO"],
+["ODS","Simulado ODS 2 e 12","Fome zero e consumo sustentável"],
+["Shelf life","Simulado Shelf life","Validade e análises sensorial e microbiológica"],
+["Intrínsecos","Simulado Fatores intrínsecos","Aa, pH, potencial redox e nutrientes"],
+["Extrínsecos","Simulado Fatores extrínsecos","Temperatura, oxigênio, umidade e gases"],
+["Deteriorantes","Simulado Deteriorantes","Deteriorantes x patogênicos e enlatados"],
+["Perigos","Simulado Perigos","Biológico, químico e físico"],
+["DTA","Simulado DTA","Tipos de DTA e as 4 etapas"],
+["Análise micro","Simulado Análise micro","Indicadores, coliformes e meios de cultura"]];
+var cur,done,hit;
+S.forEach(function(t){var b=el('button','card'+(t[0]==='Prova'?' pr':''));var d=el('div');d.appendChild(el('b','',t[1]));d.appendChild(el('span','',t[2]));
+b.appendChild(d);b.appendChild(el('em','','›'));b.onclick=function(){start(t)};$('scards').appendChild(b)});
+function upd(){$('score').textContent=done<10?hit+' acertos · '+done+' / 10 respondidas':'Fim! Você acertou '+hit+' de 10.'}
+function fim(){done++;upd()}
+function start(t){cur=t;$('shome').style.display='none';$('run').style.display='block';$('stitle').textContent=t[1];
+var pc=t[0]==='Prova'?C:C.filter(function(q){return q[0]===t[0]}),po=t[0]==='Prova'?O:O.filter(function(q){return q[0]===t[0]});
+var l=$('slist');l.innerHTML='';done=0;hit=0;upd();var n=0;
+sh(pc).slice(0,8).forEach(function(q){n++;var d=el('div','q');d.appendChild(el('span','tag',q[0]+' · fechada'));d.appendChild(el('p','',n+'. '+q[1]));
+var sm=el('small');
+sh([0,1,2,3]).forEach(function(k){var o=el('button','o',q[2+k]);o.onclick=function(){
+d.querySelectorAll('.o').forEach(function(x){x.disabled=true;if(x.textContent===q[2])x.classList.add('right')});
+if(o.textContent===q[2])hit++;else o.classList.add('wrong');sm.textContent=q[6];fim()};d.appendChild(o)});
+d.appendChild(sm);l.appendChild(d)});
+sh(po).slice(0,2).forEach(function(q){n++;var d=el('div','q');d.appendChild(el('span','tag',q[0]+' · aberta'));d.appendChild(el('p','',n+'. '+q[1]));
+var ta=document.createElement('textarea');ta.placeholder='Escreva sua resposta';d.appendChild(ta);
+var b=el('button','btn','Ver gabarito');var box=el('div');
+b.onclick=function(){b.remove();box.appendChild(el('div','gab','Gabarito: '+q[2]));
+var y=el('button','btn g','Acertei'),x=el('button','btn r','Errei');
+function f(v){y.remove();x.remove();if(v)hit++;fim()}y.onclick=function(){f(1)};x.onclick=function(){f(0)};box.appendChild(y);box.appendChild(x)};
+d.appendChild(b);d.appendChild(box);l.appendChild(d)});
+window.scrollTo(0,0)}
+function lista(){$('run').style.display='none';$('shome').style.display='block';window.scrollTo(0,0)}
+$('sback').onclick=lista;$('nsim').onclick=function(){start(cur)};
+</script>
+</body>
+</html>
