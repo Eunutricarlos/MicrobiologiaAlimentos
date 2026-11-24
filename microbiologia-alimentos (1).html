@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Microbiologia dos Alimentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#1c2230;--mute:#667085;--line:#e4e7ec;--acc:#0e8f7e;--onacc:#fff;--agar:#e0a030;--bad:#d64550;--ok:#2f9e63;--soft:#e8f5f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1419;--card:#171d25;--ink:#e8edf2;--mute:#94a0b0;--line:#252d38;--acc:#3ccbb5;--onacc:#0f1419;--agar:#f0b84f;--bad:#f0808a;--ok:#5fd398;--soft:#15302c}}
+:root[data-theme="dark"]{--bg:#0f1419;--card:#171d25;--ink:#e8edf2;--mute:#94a0b0;--line:#252d38;--acc:#3ccbb5;--onacc:#0f1419;--agar:#f0b84f;--bad:#f0808a;--ok:#5fd398;--soft:#15302c}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px);scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.2;margin:0}
+.in{max-width:760px;margin:0 auto;padding:0 18px}
+header{padding:18px 0 4px}
+header h1{font-size:clamp(24px,6vw,34px)}
+header p{color:var(--mute);margin:6px 0 0;font-size:15px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+.tabs{display:flex;gap:8px;padding:10px 0}
+.tabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font:600 14px Figtree,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 6px;cursor:pointer}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.tabs svg{width:18px;height:18px;flex:none}
+.sub{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px}
+.sub a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
+.view{display:none}.view.on{display:block}
+#topics{display:none}#topics.on{display:block}
+#topics section{display:none}#topics section.on{display:block}
+.back{display:none;margin:16px 0 0;font:600 14px Figtree,sans-serif;color:var(--acc);background:none;border:0;padding:4px 0;cursor:pointer}
+.back.on{display:inline-block}
+.intro{color:var(--mute);margin:18px 0 6px;font-size:15px}
+.card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:8px 0;cursor:pointer}
+.card.pr{border-color:var(--acc);background:var(--soft)}
+.card:hover,.card:focus-visible{border-color:var(--acc);outline:none}
+.card div{flex:1}.card b{display:block;font-weight:600;font-size:16px}
+.card span{display:block;color:var(--mute);font-size:14px;line-height:1.4;margin-top:2px}
+.card em{font-style:normal;color:var(--mute);font-size:20px}
+section{padding:22px 0 4px}
+h2{font-size:24px;margin-bottom:10px}
+h3{font-size:17px;margin:14px 0 4px}
+p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.tip{border-left:4px solid var(--agar);border-radius:4px 10px 10px 4px}
+.warn{border-left:4px solid var(--bad);border-radius:4px 10px 10px 4px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.grid .box{margin:0}
+.tag{display:inline-block;font-size:13px;font-weight:600;color:var(--acc);background:var(--soft);border-radius:6px;padding:1px 8px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px;background:var(--card);font-size:14.5px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+.steps{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:8px 0}
+.steps li{flex:1 1 140px;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--acc);border-radius:8px;padding:9px;margin:0;font-size:14.5px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.q>p{font-weight:600;margin-top:0}
+.q .o{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 11px;margin:6px 0;cursor:pointer}
+.q .o:hover:enabled,.q .o:focus-visible{border-color:var(--acc);outline:none}
+.right{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 18%,transparent)!important}
+.wrong{border-color:var(--bad)!important;background:color-mix(in srgb,var(--bad) 18%,transparent)!important}
+.q small,.gab{display:block;color:var(--mute);margin-top:6px;font-size:14.5px}
+.gab{color:var(--ink);background:var(--soft);border-radius:8px;padding:8px 11px}
+textarea{width:100%;min-height:80px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;resize:vertical}
+.note{color:var(--mute);font-size:13px;margin:6px 0}
+.btn{font:600 14px Figtree,sans-serif;background:var(--acc);color:var(--onacc);border:0;border-radius:8px;padding:8px 14px;cursor:pointer;margin:6px 6px 0 0}
+.btn.g{background:var(--ok)}.btn.r{background:var(--bad)}.btn.g,.btn.r{color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px}
+details summary{cursor:pointer;color:var(--acc);font-weight:600}
+#score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);background:var(--ink);color:var(--bg);border-radius:99px;padding:8px 16px;width:max-content;max-width:100%;margin:14px auto 0;font-weight:600;font-size:14px}
+footer{padding:26px 0 60px;color:var(--mute);font-size:14px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+<header><h1>Microbiologia dos Alimentos</h1></header>
+<div class="tabs" role="tablist">
+<button class="on" data-v="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>Resumo</button>
+<button data-v="sim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 13l2 2 4-4"/></svg>Simulado</button>
+</div>
+</div></div>
+
+<main class="in">
+<div class="view on" id="res">
+<div id="home"><p class="intro">Toque em um assunto para ver o resumo.</p></div>
+<button class="back" id="back">‹ Todos os assuntos</button>
+<div id="topics">
+
+<section id="hist"><h2>História da produção de alimentos</h2>
+<ul>
+<li>A produção de alimentos começou há <b>8 a 10 mil anos</b>. Antes disso, o ser humano vivia <b>caçando e coletando</b>, como nômade, seguindo os rebanhos e as estações das plantas.</li>
+<li>Com o alimento preparado e guardado, surgiram os problemas de <b>deterioração, toxicidade e transmissão de doenças</b>, sobretudo por armazenamento inadequado.</li>
+<li><b>Neolítico:</b> domesticaram plantas e animais (cevada, ervilha, lentilha, grão-de-bico, ervilhaca), fixaram-se em um lugar e formaram aldeias, depois cidades. Sobrou tempo para outras atividades além de buscar comida. Já havia melhoramento genético empírico: escolhiam os melhores grãos para replantar.</li>
+<li><b>Roma:</b> comer deitado era símbolo de distinção. O "vomitarium" para vomitar e continuar comendo é um <b>mito</b>, sem provas.</li>
+<li><b>Brasil:</b> grande território, biodiversidade, clima tropical e tecnologia (microbiologia agrícola, produtos biológicos, irrigação, melhoramento genético). É um dos maiores exportadores de alimentos.</li>
+</ul>
+<h3>Segurança alimentar</h3>
+<p>Conceito surgido na Europa na 1ª Guerra Mundial, por causa da fome. A <b>FAO</b> foi criada em <b>1945</b> e em 1948 a alimentação foi reconhecida como direito humano básico. O Dia Mundial da Alimentação é <b>16 de outubro</b>.</p>
+<p class="box tip"><b>Definição (FAO):</b> todas as pessoas, o tempo todo, com acesso físico, social e econômico a alimentos suficientes, <b>seguros e nutritivos</b>, para uma vida ativa e saudável. Ter comida não basta: uma criança que só come arroz está em insegurança alimentar.</p>
+<p><b>4 dimensões:</b> estabilidade no acesso, disponibilidade, distribuição e utilização adequada dos alimentos.</p>
+<p><b>Números do slide:</b> em 2020, 2,37 bilhões de pessoas sem dieta saudável e 811 milhões com fome (FAO). No Brasil, 116,8 milhões em insegurança alimentar e 19,1 milhões com fome (Rede Penssan).</p>
+</section>
+
+<section id="ods"><h2>ODS 2 e ODS 12</h2>
+<div class="grid">
+<div class="box"><span class="tag">ODS 2</span><h3>Fome zero e agricultura sustentável</h3><p>Acabar com todas as formas de fome e má-nutrição até 2030. Meta: sistemas sustentáveis de produção e práticas agrícolas resilientes (clima extremo, seca, inundação), que preservem o solo e os ecossistemas.</p></div>
+<div class="box"><span class="tag">ODS 12</span><h3>Consumo e produção sustentáveis</h3><p>Reduzir <b>pela metade</b> o desperdício per capita (varejo e consumidor) e as perdas na cadeia, incluindo pós-colheita. Também apoiar países em desenvolvimento em ciência e tecnologia.</p></div>
+</div></section>
+
+<section id="shelf"><h2>Shelf life (prazo de validade)</h2>
+<p>É a <b>vida útil</b>: tempo entre a produção e o consumo em que o alimento mantém segurança e qualidade. A Anvisa prevê duas formas de determinar:</p>
+<div class="grid">
+<div class="box"><h3>Análise microbiológica</h3><p>Cultiva bactérias de amostras coletadas em dias diferentes, conta quantas há (e a fração de aeróbios e anaeróbios). Mostra quando o alimento <b>deixa de ser seguro</b>.</p></div>
+<div class="box"><h3>Análise sensorial</h3><p>Um grupo de pessoas prova o alimento a cada dia e dá notas. Mostra quando ele <b>deixa de ser agradável</b>. Costuma dar validade <b>menor</b> que a microbiológica, porque textura, odor e sabor mudam antes de o alimento estar realmente estragado.</p></div>
+</div>
+<ul>
+<li><b>Fatores:</b> condições de armazenamento (temperatura, luz, umidade), composição (muito açúcar, pouca água e pH ácido duram mais) e processamento/embalagem.</li>
+<li><b>Rótulo (RDC 259/2002):</b> validade até 90 dias = dia e mês; acima de 90 dias = pode ser só mês e ano. Se exige condição especial de conservação, precisa constar (ex.: temperatura).</li>
+<li>Ausência de prazo ou venda de produto impróprio é <b>infração sanitária</b>. Quem regula é a Anvisa (Lei 9.782/99).</li>
+</ul></section>
+
+<section id="intr"><h2>Fatores intrínsecos (do alimento)</h2>
+<p>O IFST classifica assim: intrínsecos são propriedades do próprio alimento (pH, acidez, nutrientes, conservantes, matéria-prima). Extrínsecos são do ambiente. Podem ser ótimos ou limitantes para o crescimento.</p>
+<h3>1. Atividade de água (Aa = P/P₀)</h3>
+<p>Mede a água <b>disponível</b> para o microrganismo.</p>
+<div class="wrap"><table>
+<tr><th>Aa</th><th>Exemplos</th><th>O que cresce</th></tr>
+<tr><td>≥ 0,98</td><td>carne e peixe frescos, frutas, vegetais, leite</td><td>Praticamente tudo</td></tr>
+<tr><td>0,93 a 0,98</td><td>pão, queijo processado, carnes curadas, salsicha cozida</td><td>Vários</td></tr>
+<tr><td>0,85 a 0,93</td><td>carne seca, presunto cru, leite condensado</td><td>Bolores (micotoxinas) e só uma bactéria patogênica: <i>S. aureus</i></td></tr>
+<tr><td>0,60 a 0,85</td><td>frutas secas, farinhas, geleias, nozes</td><td>Sem patogênicas; só xerofílicos, osmofílicos e halofílicos (deterioração)</td></tr>
+<tr><td>&lt; 0,60</td><td>chocolate, mel, biscoito, leite em pó</td><td>Nada se multiplica, mas pode ficar viável por muito tempo</td></tr>
+</table></div>
+<h3>2. pH</h3>
+<p>O ideal é neutro (6,5 a 7,5). Bactérias toleram pouca variação; fungos e leveduras aguentam mais acidez.</p>
+<ul><li><b>Baixa acidez:</b> pH &gt; 4,5 (mais sujeitos a patogênicos e deteriorantes).</li><li><b>Ácidos:</b> 4,0 a 4,5 (leveduras, bolores, bactérias láticas, alguns <i>Bacillus</i>).</li><li><b>Muito ácidos:</b> &lt; 4,0 (quase só bolores e leveduras).</li></ul>
+<p>Cortes: 4,5 = mínimo do <i>Clostridium botulinum</i> (crescer e produzir toxina); 4,0 = mínimo da maioria das bactérias.</p>
+<h3>3. Potencial de óxido-redução (Eh)</h3>
+<p>Aeróbios precisam de Eh positivo (maioria dos bolores, leveduras oxidativas e bactérias deteriorantes como <i>Pseudomonas</i>). Anaeróbios precisam de Eh baixo.</p>
+<h3>4. Nutrientes e 5. Antimicrobianos naturais</h3>
+<p>Microrganismos precisam de fonte de carbono, nitrogênio (aminoácidos, proteínas), vitaminas e sais minerais. Barreiras naturais: casca (ovos, nozes, frutas) e substâncias como <b>lisozima</b> na clara do ovo (rompe parede celular), ácido benzoico na amora, eugenol no cravo, aldeído cinâmico na canela, lactenina no leite.</p>
+</section>
+
+<section id="extr"><h2>Fatores extrínsecos (do ambiente)</h2>
+<h3>1. Temperatura</h3>
+<p>É provavelmente o fator ambiental mais importante. Acima da máxima, as proteínas desnaturam e o microrganismo morre.</p>
+<div class="wrap"><table>
+<tr><th>Grupo</th><th>Temperatura ótima</th><th>Obs.</th></tr>
+<tr><td>Psicrófilos</td><td>10 a 15 °C</td><td>crescem na geladeira</td></tr>
+<tr><td>Mesófilos</td><td>25 a 40 °C</td><td>a grande maioria em alimentos</td></tr>
+<tr><td>Termófilos</td><td>45 a 60 °C</td><td>gêneros <i>Bacillus</i> e <i>Clostridium</i></td></tr>
+<tr><td>Hipertermófilos</td><td>&gt; 60 °C</td><td></td></tr>
+</table></div>
+<h3>2. Oxigênio</h3>
+<p>Há aeróbios (crescem na superfície, formando película), anaeróbios (não toleram O₂) e <b>anaeróbios facultativos</b>, que vivem com ou sem O₂ e são a maioria das espécies de interesse na indústria de alimentos.</p>
+<h3>3. Umidade relativa (UR)</h3>
+<p>Interfere direto na Aa (UR = Aa × 100). Alimento com Aa baixa em ambiente de UR alta absorve água, a Aa sobe e pode deteriorar.</p>
+<h3>4. Composição gasosa</h3>
+<p>Atmosfera modificada troca parte do O₂ por outros gases (vácuo, N₂, CO₂). CO₂ inibe o crescimento e, na carne, barra as Gram-negativas e deixa <i>Lactobacillus</i> dominar. Ozônio não é indicado para alimentos muito gordurosos (acelera a rancificação).</p>
+<p class="box tip"><b>Teoria dos obstáculos (Leistner):</b> a conservação vem da combinação de vários fatores (temperatura, Aa, pH, potencial redox, conservantes, atmosfera modificada, microrganismos competidores). Juntos, potencializam o efeito de cada um.</p>
+</section>
+
+<section id="det"><h2>Deteriorantes x patogênicos</h2>
+<div class="wrap"><table>
+<tr><th></th><th>Deteriorantes</th><th>Patogênicos</th></tr>
+<tr><td>Efeito</td><td>Mudam textura, sabor, odor e aparência</td><td>Quase não alteram nada</td></tr>
+<tr><td>Dá para perceber?</td><td>Sim, não se disfarçam</td><td>Não, se disfarçam melhor. O surto ocorre mesmo sem mudança de sabor ou odor</td></tr>
+<tr><td>Consequência</td><td>Perda de qualidade e desperdício</td><td>Doença (DTA)</td></tr>
+</table></div>
+<ul>
+<li><b>Bactérias:</b> deterioram usando carboidratos, substâncias nitrogenadas e lipídios.</li>
+<li><b>Leveduras:</b> a mesma espécie pode ser útil num produto (cerveja, vinho) e deteriorante em outro (suco de fruta), como <i>Saccharomyces</i>.</li>
+<li><b>Bolores:</b> crescem de pH 2 a 9, resistem à desidratação, exigem O₂ e formam colônias visíveis; alguns produzem micotoxinas.</li>
+<li><b>Enzimas:</b> proteínas sem vida própria que agem como catalisadores e também deterioram.</li>
+<li><b>Enlatados:</b> "esterilização comercial" não é esterilidade absoluta. Problemas: subprocessamento térmico, vazamento, corrosão (estufamento por hidrogênio) e enchimento excessivo.</li>
+</ul></section>
+
+<section id="perigo"><h2>Perigos (fatores de risco)</h2>
+<p>Perigo é qualquer condição ou contaminante que pode causar mal ou dano ao consumidor. São controlados pelo <b>APPCC</b> e pelas <b>Boas Práticas</b>.</p>
+<div class="grid">
+<div class="box"><span class="tag">Biológico</span><p>Bactérias, fungos, vírus e parasitas. Bactérias patogênicas e suas toxinas causam a maioria dos surtos. Ocorre <b>DTA</b>.</p></div>
+<div class="box"><span class="tag">Químico</span><p>Produtos de limpeza, pesticidas, herbicidas, toxinas fúngicas, antibióticos, anabolizantes, aditivos tóxicos, lubrificantes, tintas.</p></div>
+<div class="box"><span class="tag">Físico</span><p>Corpos estranhos: vidro, metal, madeira, plástico de embalagem, papel, osso. Podem ferir a boca ou quebrar dente.</p></div>
+</div>
+<p><b>Contaminação cruzada:</b> transferência de patógenos entre materiais, superfícies de contato e alimentos (ex.: alimento cozido recontaminado). <b>Causas:</b> falha em processos, insumos ou equipamentos contaminados, falha humana e higienização ineficiente.</p>
+</section>
+
+<section id="dta"><h2>DTA — Doenças Transmitidas por Alimentos</h2>
+<p>Causadas por alimento ou água contaminados por microrganismos patogênicos, substâncias químicas ou toxinas. Existem mais de 250 tipos. As <b>bactérias</b> são o grupo com maior incidência. Prevenção: Boas Práticas (RDC 216, RDC 331 e IN 60 da Anvisa).</p>
+<h3>As 4 etapas</h3>
+<ol class="steps">
+<li><b>Contaminação</b><br>patógeno viável chega pela matéria-prima, pessoal, superfícies, insetos, roedores ou ar</li>
+<li><b>Multiplicação</b><br>depende do alimento, do microrganismo, da temperatura e do tempo. Faixa crítica: 20 a 50 °C. Seguro: abaixo de 10 °C (ideal até 4 °C) ou acima de 60 °C</li>
+<li><b>Sobrevivência</b><br>não esporulados morrem na cocção. Falha na cocção, na sanitização ou no reaquecimento deixa sobreviver</li>
+<li><b>Ingestão</b><br>idosos, crianças e pessoas debilitadas são mais suscetíveis</li>
+</ol>
+<h3>Três formas de DTA</h3>
+<div class="wrap"><table>
+<tr><th>Tipo</th><th>Como acontece</th><th>Exemplos</th></tr>
+<tr><td><b>Infecção</b></td><td>Ingere o microrganismo vivo, ele se multiplica no intestino e invade mucosa ou tecidos</td><td><i>Salmonella, E. coli, Shigella, Listeria</i></td></tr>
+<tr><td><b>Intoxicação</b></td><td>Ingere a toxina que o microrganismo já produziu no alimento. Não precisa da célula viva</td><td><i>S. aureus</i>, <i>C. botulinum</i></td></tr>
+<tr><td><b>Toxinfecção</b></td><td>Ingere o microrganismo vivo e ele produz ou libera a toxina depois de ingerido, no intestino</td><td><i>C. perfringens</i>, <i>B. cereus</i> (diarreica)</td></tr>
+</table></div>
+</section>
+
+<section id="micro"><h2>Análise microbiológica e indicadores</h2>
+<ul>
+<li><b>Microrganismos indicadores:</b> mostram contaminação de origem fecal, provável presença de patógenos, deterioração potencial ou condições sanitárias inadequadas.</li>
+<li><b>Indicadores fecais:</b> coliformes a 45 °C, <i>E. coli</i> e <i>Clostridium perfringens</i>.</li>
+<li><b>Coliformes totais:</b> família Enterobacteriaceae (<i>Escherichia, Klebsiella, Enterobacter, Citrobacter</i>). <b>Coliformes fecais (termotolerantes):</b> <i>E. coli</i> e algumas cepas dos outros gêneros. <b>Falta de higiene faz as enterobactérias subirem.</b></li>
+<li><b>Meios de cultura:</b> permitem crescer microrganismos de forma <b>artificial</b> no laboratório. São preparados para <b>selecionar</b> o tipo de microrganismo que se quer estudar.</li>
+<li><b>Parâmetros (Anvisa):</b> mesófilas totais, coliformes, coliformes fecais, <i>Salmonella</i>, clostrídio sulfito redutor, <i>S. aureus</i>, bolores e leveduras, <i>B. cereus</i>. Também se avaliam aspecto, cor e odor.</li>
+<li><b>Como se faz:</b> microbiologia clássica (cultivo) ou sequenciamento de DNA, que também detecta fraudes. Produtores, restaurantes e hospitais devem fazer análises periódicas em laboratório habilitado.</li>
+</ul>
+<h3>Curva de crescimento (extra)</h3>
+<p><b>Lag</b> (adaptação; quanto maior, melhor para conservar) → <b>Log/exponencial</b> (Nt = N₀ · 2ⁿ, com n = t/tg, tg = tempo de geração) → <b>Estacionária</b> (nascimentos = mortes) → <b>Declínio</b> (faltam nutrientes, sobram toxinas).</p>
+</section>
+
+<section id="interesse"><h2>Microrganismos de interesse em alimentos</h2>
+<p>A qualidade microbiológica depende de dois momentos: a <b>contaminação inicial</b> (quantidade e tipo de microrganismos que já estavam lá, ligados à qualidade da matéria-prima e à higiene de ambientes, manipuladores e superfícies) e a <b>multiplicação</b> (regulada pelo tipo de alimento e pelas condições do ambiente).</p>
+<div class="grid">
+<div class="box"><span class="tag">1</span><h3>Deteriorantes</h3><p>Estragam o alimento.</p></div>
+<div class="box"><span class="tag">2</span><h3>Patogênicos</h3><p>Causam doença (DTA).</p></div>
+<div class="box"><span class="tag">3</span><h3>Produtores de alimentos</h3><p>Fermentadores e benéficos.</p></div>
+<div class="box"><span class="tag">4</span><h3>Indicadores</h3><p>Mostram higiene e risco.</p></div>
+</div>
+<h3>Deterioração</h3>
+<p>Alimento deteriorado é aquele danificado por agentes microbiológicos, químicos ou físicos, a ponto de ficar inaceitável para o consumo. Muda cor, odor, sabor, textura e aspecto. Os agentes são bactérias, fungos e leveduras, e <b>bactérias e fungos são os mais importantes</b>. Cerca de 20% das frutas e hortaliças colhidas se perdem por deterioração microbiana.</p>
+<div class="wrap"><table>
+<tr><th>Alimento</th><th>Exemplos</th></tr>
+<tr><td><b>Estável (não perecível)</b></td><td>açúcar, farinha</td></tr>
+<tr><td><b>Semi-perecível</b></td><td>batata, maçã, nozes (ficam bem se conservados e manipulados de forma apropriada)</td></tr>
+<tr><td><b>Perecível</b></td><td>carnes, pescados, maioria das frutas, hortaliças, ovos e leite</td></tr>
+</table></div>
+<div class="wrap"><table>
+<tr><th>Processo</th><th>Em que alimento</th><th>Quem faz e o que acontece</th></tr>
+<tr><td><b>Ranço</b></td><td>ricos em gordura</td><td>microrganismos lipolíticos (principalmente bactérias): gordura vira ácidos graxos e glicerol</td></tr>
+<tr><td><b>Putrefação</b></td><td>ricos em proteína (carnes)</td><td>bactérias proteolíticas: proteínas viram putrescina, cadaverina, H₂S e NH₃</td></tr>
+<tr><td><b>Azedamento e coagulação</b></td><td>leite</td><td>bactérias do ácido lático: lactose vira ácido lático e outros ácidos</td></tr>
+</table></div>
+<h3>Patogênicos e fontes de contaminação</h3>
+<ul>
+<li><b>Intoxicação:</b> toxina pronta no alimento (toxina estafilocócica, toxina botulínica). <b>Infecção:</b> o patógeno cresce, invade tecidos e causa o efeito. <b>Toxinfecção:</b> ingere microrganismos que se multiplicam e produzem toxinas.</li>
+<li><b>Liberadores de toxina:</b> <i>S. aureus, C. perfringens, C. botulinum, Vibrio cholerae, B. cereus</i> e fungos filamentosos.</li>
+<li><b>Causadores de infecção:</b> <i>Salmonella, E. coli, Shigella, V. parahaemolyticus, Campylobacter, Listeria monocytogenes, Yersinia</i>.</li>
+<li><b>Fontes de contaminação:</b> solo e água, plantas, utensílios, trato intestinal de humanos e animais, vetores (invertebrados e vertebrados), manipuladores, ar e poeira. Sempre refletem higiene precária na produção, armazenamento, distribuição ou manuseio.</li>
+</ul>
+<h3>Microrganismos benéficos</h3>
+<p>Transformam o alimento em outro alimento. Podem se manter no processo ou ser colocados de propósito. <b>O mesmo microrganismo pode deteriorar um alimento e ser desejável em outro.</b></p>
+<div class="wrap"><table>
+<tr><th>Grupo</th><th>Usos</th></tr>
+<tr><td><b>Bactérias</b></td><td>iogurtes e queijos, salames, picles</td></tr>
+<tr><td><b>Leveduras</b></td><td>pão, cerveja e vinho, suplemento alimentar</td></tr>
+<tr><td><b>Fungos</b></td><td>fermentação de queijos, e consumidos direto (champignon, shitake)</td></tr>
+</table></div>
+<div class="wrap"><table>
+<tr><th>Microrganismo</th><th>Produto</th></tr>
+<tr><td><i>Saccharomyces</i></td><td>bebidas alcoólicas e etanol</td></tr>
+<tr><td><i>Acetobacter</i></td><td>vinagre</td></tr>
+<tr><td><i>Aspergillus niger</i></td><td>ácido cítrico</td></tr>
+<tr><td><i>Lactobacillus</i></td><td>ácido lático, bebidas lácteas</td></tr>
+<tr><td><i>Propionibacterium</i></td><td>vitamina B12</td></tr>
+<tr><td><i>Penicillium chrysogenum</i></td><td>penicilina G</td></tr>
+<tr><td><i>Xanthomonas campestris</i></td><td>goma xantana</td></tr>
+<tr><td><i>Corynebacterium glutamicum</i></td><td>glutamato monossódico</td></tr>
+</table></div>
+</section>
+
+<section id="surto"><h2>Surtos de DTA e vigilância</h2>
+<p>As DTA vêm <b>aumentando no mundo</b>. Fatores citados: crescimento das populações, grupos vulneráveis ou mais expostos, urbanização desordenada, produção de alimentos em grande escala e controle deficiente de órgãos públicos e privados sobre a qualidade dos alimentos.</p>
+<p>Também pesam: mais gente comendo alimentos de pronto consumo coletivo (<b>fast-foods</b>) e em vias públicas, novas formas de produção, mais aditivos, mudança de hábitos alimentares, mudanças ambientais, globalização e facilidade de deslocamento, inclusive entre países.</p>
+<p>Pode ser infecção ou intoxicação, <b>aguda ou crônica</b>, em <b>surto ou caso isolado</b>, com distribuição localizada ou disseminada e formas clínicas variadas.</p>
+<h3>Por que os surtos acontecem (fatores predisponentes)</h3>
+<div class="wrap"><table>
+<tr><th>Fator</th><th>%</th></tr>
+<tr><td><b>Refrigeração inadequada</b></td><td><b>70,8</b></td></tr>
+<tr><td><b>Mãos contaminadas</b></td><td><b>24,8</b></td></tr>
+<tr><td><b>Preparo inadequado</b></td><td><b>22,3</b></td></tr>
+<tr><td>Instalações deficientes</td><td>7,4</td></tr>
+<tr><td>Má higiene</td><td>5,2</td></tr>
+<tr><td>Utensílios contaminados</td><td>4,6</td></tr>
+<tr><td>Matéria-prima contaminada</td><td>4,1</td></tr>
+<tr><td>Cozimento ou reaquecimento deficiente</td><td>3,3</td></tr>
+<tr><td>Equipamentos inadequados</td><td>1,6</td></tr>
+<tr><td>Contaminação por roedores</td><td>1,4</td></tr>
+</table></div>
+<p class="note">A soma passa de 100% porque um mesmo surto pode ter mais de um fator. Os três primeiros foram os destacados no slide. Ou seja: temperatura, mãos e preparo explicam a maior parte dos surtos.</p>
+<h3>VE-DTA</h3>
+<p>É o <b>Sistema de Vigilância Epidemiológica das Doenças Transmitidas por Alimentos</b>. Pouco se conhece da real dimensão do problema porque as informações são precárias, e a vigilância precisaria ser capaz de detectar a entrada de novos patógenos, como <i>E. coli</i> O157:H7 e <i>Salmonella typhimurium</i> DT104. Vários países da América Latina estão montando seus sistemas por causa dos poucos estudos sobre os agentes causadores.</p>
+<p><b>Reúne as áreas de:</b> vigilância epidemiológica, sanitária e ambiental; defesa e inspeção sanitária animal e vegetal; laboratórios de saúde pública e de defesa sanitária animal e vegetal; educação em saúde; assistência à saúde; e saneamento.</p>
+</section>
+
+<section id="indic"><h2>Microrganismos indicadores</h2>
+<p>Refletem a qualidade microbiológica do alimento quanto à <b>vida de prateleira</b> ou à <b>segurança</b> (presença de patógenos). Servem para monitorar, detectar mudanças de qualidade, classificar e restringir o uso de águas ou alimentos.</p>
+<h3>Por que usar indicador e não procurar cada patógeno</h3>
+<ul>
+<li>Monitorar todos é difícil e antieconômico: são muitos, podem estar em concentração baixa demais para detectar e o isolamento leva dias ou semanas.</li>
+<li>A ausência de um patógeno não prova a ausência de outro.</li>
+</ul>
+<div class="grid">
+<div class="box"><h3>Um bom indicador</h3><ul><li>é de detecção fácil e rápida</li><li>se diferencia da microbiota</li><li>aparece quando o patógeno aparece e some quando ele some</li><li>cresce de forma parecida com o patógeno</li><li>tem sobrevida maior que a do patógeno</li></ul></div>
+<div class="box"><h3>Indica</h3><ul><li>contaminação fecal</li><li>provável presença de patógenos</li><li>deterioração potencial</li><li>condições de higiene</li><li>falha no processamento, contaminação pós-processamento e do ambiente</li></ul></div>
+</div>
+<p><b>Principais:</b> aeróbios mesófilos, psicrotróficos e termófilos, bolores e leveduras, e coliformes totais e termotolerantes.</p>
+<h3>Coliformes e E. coli</h3>
+<div class="wrap"><table>
+<tr><th></th><th>Coliformes totais</th><th>Coliformes termotolerantes e <i>E. coli</i></th></tr>
+<tr><td><b>Grupo</b></td><td>Enterobacteriaceae, Gram-negativos, não esporulados, bastonetes</td><td>Enterobacteriaceae, Gram-negativos, não esporulados</td></tr>
+<tr><td><b>Fermentam lactose (gás)</b></td><td>a 35 a 37 °C</td><td>a 44 a 45,5 °C</td></tr>
+<tr><td><b>Gêneros</b></td><td><i>Escherichia, Klebsiella, Citrobacter, Enterobacter</i> (os três últimos também em vegetais e solo)</td><td><i>Escherichia</i> e algumas cepas de <i>Enterobacter</i> e <i>Klebsiella</i></td></tr>
+<tr><td><b>Indicam</b></td><td>condições de higiene: contaminação pós-processamento, limpeza, sanificação ou tratamento térmico deficientes. Presença = <b>sujeira</b></td><td>condições higiênicas e possível presença de enteropatógenos; contaminação fecal</td></tr>
+</table></div>
+<p><b>E. coli</b> é indicador de contaminação fecal na água desde 1982 e hoje também da qualidade higiênico-sanitária do alimento. Tem habitat exclusivo no intestino do homem e de animais de sangue quente, aparece em número elevado nas fezes, resiste bem ao ambiente fora do intestino e é fácil de detectar.</p>
+<p class="box tip"><b>Atenção:</b> coliformes não causam doença, e a porcentagem de <i>E. coli</i> patogênica é pequena. Mesmo assim, <i>E. coli</i> no alimento indica risco, porque patógenos entéricos podem estar presentes.</p>
+<h3>Outros indicadores e contagens</h3>
+<ul>
+<li><b>Mesófilos em placa:</b> qualidade sanitária (exceto alimentos fermentados). Número alto em perecíveis = abuso de tempo e temperatura. Quase todos os patógenos de origem alimentar e boa parte dos deteriorantes são mesófilos.</li>
+<li><b>Psicrotróficos e termófilos:</b> avaliam deterioração de alimentos refrigerados ou tratados termicamente.</li>
+<li><b>Anaeróbios:</b> indicam condições favoráveis a patógenos anaeróbios. Sem meios pré-seletivos, pesquisam-se os facultativos (Enterobacteriaceae, enterococos, estafilococos).</li>
+<li><b>Bolores e leveduras:</b> ligados a alimentos ácidos e de Aa baixa, com risco de micotoxinas. Bolores em equipamentos indicam falha na sanificação. Leveduras podem indicar falha na higienização dos manipuladores. A deterioração por leveduras não faz mal à saúde.</li>
+<li><b>Estafilococos / <i>S. aureus</i>:</b> número alto = perigo potencial, falha na manipulação e sanitização questionável; possível enterotoxina.</li>
+<li><b>Clostrídios sulfito redutores:</b> possível presença de <i>C. perfringens</i> e <i>C. botulinum</i>. São esporulados e não são específicos de fezes humanas.</li>
+<li><b>Enterobacteriaceae:</b> incluem espécies não fecais (<i>Erwinia, Serratia</i>, comuns em vegetais). Indicam qualidade higiênico-sanitária geral, e não inocuidade. Altas em pasteurizados = falha de higiene. Altas em vegetais in natura = esperado, sem risco.</li>
+<li><b>Exemplos de microrganismos por alimento:</b> <i>Bacillus</i> na massa de pão, <i>Clostridium</i> em queijos duros, bactérias lácticas em cervejas e vinhos.</li>
+</ul>
+</section>
+
+<section id="carne"><h2>Microbiologia da carne</h2>
+<p><b>Carne</b> é a parte comestível de bovinos, búfalos, ovinos, caprinos, suínos, equinos, coelhos, aves, rãs e peixes, incluindo o tecido muscular e os órgãos. Importam os aspectos sensoriais, o valor nutricional, as condições sanitárias e o bem-estar animal.</p>
+<h3>Qualidade e segurança</h3>
+<ul>
+<li>Existe o <b>Código Internacional de Práticas de Higiene para a Carne Fresca</b> (Codex Alimentarius).</li>
+<li>Carne segura: não causa doença quando preparada e consumida como deve, não tem resíduos de agrotóxicos, drogas veterinárias e metais pesados acima dos limites, é livre de contaminação, foi produzida com controle higiênico adequado e cumpre a expectativa do consumidor quanto à composição.</li>
+<li><b>Rastreabilidade:</b> capacidade de acompanhar o movimento do alimento por estágios de produção, transformação e distribuição. Objetivo: transparência na cadeia da carne, <b>"do campo à mesa"</b>.</li>
+<li>Do músculo à carne: após o abate e a sangria, o músculo fica sem oxigênio e passa a produzir energia sem ar (glicogênio vira ácido lático).</li>
+</ul>
+<h3>De onde vem a contaminação</h3>
+<div class="grid">
+<div class="box"><span class="tag">Endógena</span><p>Vem do <b>animal vivo</b>: bactérias intestinais invadem tecidos e órgãos pela corrente sanguínea quando as defesas caem. Exemplos citados: <i>Salmonella</i> (carne mal cozida) e <i>C. botulinum</i>.</p></div>
+<div class="box"><span class="tag">Exógena</span><p>Vem <b>depois do abate</b> (invasão post-mortem). Ambas são prejudiciais, mas as exógenas são mais frequentes.</p></div>
+</div>
+<ul>
+<li><b>Fatores do animal:</b> fadiga, estresse, jejum prolongado, ingestão de alimentos. O jejum é importante, e a saúde e a limpeza do animal contam.</li>
+<li><b>Fontes nos matadouros:</b> peles e pelos com sujeira e fezes, ar e poeira, água de lavagem de carcaças, equipamentos e utensílios, e mão de obra.</li>
+<li><b>Ambiente:</b> ar, água e higiene, dentro e fora do frigorífico. <b>Transporte:</b> ferimentos, contusões, animais sujos, lotação.</li>
+<li><b>Processamento, utensílios e pessoas:</b> contato direto com a carne, e fonte importante quando não há limpeza e desinfecção adequadas.</li>
+</ul>
+<h3>Principais microrganismos</h3>
+<p><b>Gram-negativas:</b> <i>Acinetobacter, Aeromonas, Alcaligenes, Flavobacterium, Pseudomonas</i>, enterobactérias. <b>Gram-positivas:</b> <i>Micrococcus, Staphylococcus</i>, bactérias lácticas (<i>Lactobacillus</i>).</p>
+<div class="wrap"><table>
+<tr><th>Bactéria</th><th>Características</th><th>Sintomas / observações</th></tr>
+<tr><td><i>Staphylococcus aureus</i></td><td>Gram-positiva, esférica (cacho de uva), tem toxina, vive na pele e mucosas nasais</td><td>náuseas, vômitos e diarreia</td></tr>
+<tr><td><i>Salmonella</i></td><td>Gram-negativa, bastonete, não forma esporos; em humanos e animais domésticos</td><td>diarreia; transmitida por alimentos crus ou mal cozidos e água com contaminação fecal</td></tr>
+<tr><td><i>E. coli</i> e outros coliformes</td><td>Gram-negativa, anaeróbia facultativa; intestino de animais e humanos</td><td>quantidade pequena já causa infecção; vem de manipuladores infectados e contaminação fecal. Controle: temperatura adequada (7 °C) e BPF</td></tr>
+<tr><td><i>Clostridium perfringens</i></td><td>Gram-positiva, bastonete, forma esporos, anaeróbia, imóvel, produz toxinas</td><td>dores abdominais intensas, gases e diarreia</td></tr>
+</table></div>
+<h3>Alterações da carne</h3>
+<ul>
+<li>Variam com a <b>atmosfera</b> (aerobiose ou anaerobiose), a temperatura e o tipo de microrganismo (bactérias, bolores, leveduras).</li>
+<li><b>Carne crua a 10 até 20 °C:</b> enterobactérias, <i>Micrococcus</i> e estafilococos; <i>Pseudomonas</i> (produz muco), <i>Acinetobacter</i>, <i>Aeromonas</i>.</li>
+<li><b>Aerobiose:</b> <b>limosidade superficial</b>, um defeito. Com mais água e refrigeração, causada por <i>Pseudomonas</i> e <i>Alcaligenes</i>. Com Aa menor (salsichas, linguiças), por micrococos e leveduras. Também odor anormal, bolores e manchas, e descoloração pela mioglobina.</li>
+<li><b>Anaerobiose:</b> bactérias aeróbias facultativas e anaeróbias que crescem <b>por dentro</b>. Há <b>acidificação</b> (ácidos fórmico, acético e propiônico; <i>Clostridium</i> butíricos e coliformes contribuem) e <b>putrefação</b>: decomposição anaeróbia das proteínas, com H₂S, putrescina e cadaverina, pelo gênero <i>Clostridium</i>. É a deterioração profunda.</li>
+<li><b>Carne moída:</b> muito mais suscetível, porque na moagem os microrganismos se espalham por toda a massa.</li>
+</ul>
+<h3>Conservação pelo frio</h3>
+<div class="wrap"><table>
+<tr><th></th><th>Resfriamento</th><th>Congelamento</th></tr>
+<tr><td><b>Como</b></td><td>logo após o abate. Ar frio a 4 a 7 °C e UR de 90 a 95%: vida útil de <b>7 dias</b>. Ar frio a -1,5 °C: <b>3 a 4 semanas</b></td><td>depois do rigor e da refrigeração completa. O mais adequado é chegar a -10 °C na parte mais interna da carne</td></tr>
+<tr><td><b>Efeito</b></td><td>inibe reações enzimáticas e freia o crescimento. Crescem os <b>psicrotolerantes</b> (psicrotróficos)</td><td>a água congelada não está disponível ao metabolismo. Cristais de gelo danificam a membrana. Pode haver crescimento em bolsas de água não congelada. Deve congelar por fora e por dentro para não crescerem mesófilos (10 a 45 °C)</td></tr>
+<tr><td><b>Alterações</b></td><td>perda de água da superfície, mudança de cor, ranço oxidativo, decomposição por psicrófilos e fungos, odores estranhos, contaminação óssea (bactérias putrefativas, cor cinza a negra, cheiro de esgoto)</td><td>alteração oxidativa da gordura, dessecação da superfície, queimadura pelo frio, mudança de cor, perda de aroma, desnaturação de proteínas</td></tr>
+</table></div>
+<p><b>Desidratação:</b> a <b>secagem</b> reduz a Aa (sol, câmaras de secagem, liofilização). A <b>adição de solutos</b> aumenta a pressão osmótica: açúcar (doces, geleias, frutas secas) e sal (carnes e peixes).</p>
+<h3>Frango</h3>
+<p>As bactérias crescem na superfície (pele, cavidade do corpo e qualquer superfície cortada) e vão entrando na carne. Em frango eviscerado a 10 °C ou menos, a deterioração é principalmente por <i>Pseudomonas</i>. Acima de 10 °C, crescem <i>Alcaligenes</i> e <i>Flavobacterium</i>. O frango refrigerado apresenta odores alterados, principalmente por <i>Pseudomonas</i>, e limosidade na superfície.</p>
+</section>
+
+<section id="pesc"><h2>Pescado e ovos</h2>
+<h3>Pescado</h3>
+<ul>
+<li>Estraga rápido: composição química, gorduras insaturadas facilmente oxidáveis e pH perto da neutralidade. A deterioração pode ser por <b>autólise</b> (sucos digestivos e enzimas dos tecidos, que amolecem e desintegram a carne e espalham microrganismos), por alterações de aroma e cor, pela <b>atividade bacteriana</b>, ou pela combinação dos três.</li>
+<li>O <b>desenvolvimento bacteriano</b> é o principal. As bactérias ficam no trato digestivo, nas guelras e no muco da superfície. A parte mais suscetível é a <b>região branquial</b>, e o primeiro sinal é o <b>mau odor das guelras</b>.</li>
+<li>A microbiota depende do habitat, e a temperatura é fator de seleção. A água raramente passa de 20 °C, então predomina microbiota <b>psicrotrófica</b>.</li>
+</ul>
+<div class="grid">
+<div class="box"><span class="tag">Águas frias</span><p>Psicrófilos: <i>Pseudomonas, Alteromonas, Moraxella, Acinetobacter, Flavobacterium, Vibrio</i>.</p></div>
+<div class="box"><span class="tag">Águas quentes</span><p>Gram-positivos mesófilos: <i>Micrococcus</i> e <i>Bacillus</i>.</p></div>
+</div>
+<ul>
+<li><b>Química:</b> os microrganismos usam primeiro compostos nitrogenados não proteicos (ureia, creatina, com produção de bases voláteis). Há também mercaptanas, dimetilsulfeto, H₂S, aldeídos, acetona e álcoois. Quando esses acabam, atacam as proteínas, com alterações mais profundas.</li>
+<li><b>Reação de Éber (gás sulfídrico):</b> avalia o frescor. A decomposição bacteriana libera enxofre, que em meio ácido vira H₂S. O H₂S reage com acetato de chumbo e forma sulfeto de chumbo: <b>mancha preta espelhada no papel de filtro</b>.</li>
+</ul>
+<div class="wrap"><table>
+<tr><th>Item</th><th>Peixe fresco</th><th>Peixe avariado</th></tr>
+<tr><td><b>Cheiro</b></td><td>leve e agradável</td><td>forte, desagradável, ácido, amoniacal ou pútrido</td></tr>
+<tr><td><b>Aparência</b></td><td>luzente, metálica, com reflexo</td><td>fosca, sem brilho</td></tr>
+<tr><td><b>Corpo</b></td><td>rígido, arqueado</td><td>mole</td></tr>
+<tr><td><b>Consistência</b></td><td>firme e elástica, sem marcas à pressão</td><td>mole, deixa marcas</td></tr>
+<tr><td><b>Carne</b></td><td>firme, branca ou rosa</td><td>friável, músculos com azul ou amarelo</td></tr>
+<tr><td><b>Secreção</b></td><td>não há</td><td>presente e viscosa</td></tr>
+<tr><td><b>Escamas</b></td><td>aderentes, brilhantes</td><td>levantadas, saem fácil</td></tr>
+<tr><td><b>Pele</b></td><td>rosa, bem estendida</td><td>com rugas, descolorada, rasgável</td></tr>
+<tr><td><b>Olhos</b></td><td>claros, brilhantes, convexos, transparentes</td><td>vidrosos, opacos, côncavos, manchas na íris</td></tr>
+<tr><td><b>Brânquias</b></td><td>róseas ou vermelhas, úmidas, brilhantes</td><td>cinzentas ou cor de chumbo, secas</td></tr>
+<tr><td><b>Ânus</b></td><td>fechado</td><td>aberto e proeminente</td></tr>
+<tr><td><b>Barriga</b></td><td>normal, sem manchas</td><td>mole ou deformada, às vezes inchada</td></tr>
+<tr><td><b>Vísceras</b></td><td>limpas, reluzentes, bem diferenciadas</td><td>inchadas ou cor de vinho</td></tr>
+</table></div>
+<h3>Ovos</h3>
+<ul>
+<li>A casca se contamina por <b>fezes</b> da ave, da gaiola ou do ninho, água de lavagem, manipulação inadequada e embalagem. A microbiota normal da casca é <b>Gram-positiva</b>, e a do ovo deteriorado é <b>Gram-negativa</b>.</li>
+<li><b>Barreiras mecânicas:</b> casca, cutícula e membranas internas.</li>
+<li><b>Barreiras químicas:</b> albumina (pH alto e pouco nitrogênio disponível), ligação das proteínas com a riboflavina e da <b>avidina com a biotina</b>, que deixam esses compostos indisponíveis para os microrganismos.</li>
+<li><b>Sinais de deterioração:</b> aparência geral, rachaduras, vazamentos, perda de frescor ou brilho, sujeira no exterior, sangue coagulado.</li>
+<li><b>Teste da água:</b> ovo fresco afunda e fica deitado no fundo. Se não é tão fresco, a bolsa de ar aumenta e ele fica em pé, com a ponta para baixo. O velho e estragado tem muito ar e <b>boia</b>: não usar. Clara firme e densa = boa; mole e aguada = ruim.</li>
+</ul>
+<div class="wrap"><table>
+<tr><th>Alteração</th><th>Quem causa</th></tr>
+<tr><td>Pontos verdes na clara (fluorescentes no ultravioleta)</td><td><i>Pseudomonas fluorescens</i></td></tr>
+<tr><td>Gema com pontos coloridos, depois desintegrada</td><td><i>Pseudomonas, Acinetobacter, Alcaligenes</i> e certos coliformes</td></tr>
+<tr><td>Pontos negros, gema escurecida e desintegrada</td><td><i>Proteus, Pseudomonas, Aeromonas</i></td></tr>
+<tr><td>Sem odor característico</td><td><i>Pseudomonas fluorescens</i></td></tr>
+<tr><td>Odor frutado, muito ofensivo</td><td><i>Pseudomonas, Alcaligenes, Acinetobacter</i></td></tr>
+<tr><td>Odor pútrido, com H₂S e pressão de gás</td><td>decomposição bacteriana</td></tr>
+</table></div>
+<p>A deterioração dos ovos costuma ser <b>mais bacteriana que fúngica</b>. Nos fungos, a <b>cabeça de alfinete</b> é o emboloramento inicial, pequeno e compacto, no interior da casca. Umidade alta favorece o mofo na superfície, e o micélio entra pelos poros ou rachaduras. Também há geleificação da clara e manchas coloridas de <i>Sporotrichium</i> (vermelha) e <i>Cladosporium</i> (negra). Outros fungos: <i>Penicillium, Mucor, Thamnidium, Botrytis, Alternaria</i>.</p>
+</section>
+
+<section id="ferm"><h2>Fermentação e alimentos fermentados</h2>
+<h3>Microbiota dos alimentos</h3>
+<p>A microbiota pode ser <b>própria</b> do alimento ou <b>adquirida pelo manuseio</b>.</p>
+<ul>
+<li><b>Frutos:</b> leveduras na casca da uva fermentam o vinho. O pH da uva (2,3 a 5,0) deixa baixa a incidência de bactérias.</li>
+<li><b>Carnes:</b> corte e manuseio trazem bactérias proteolíticas e lipolíticas e fungos. Ocasionalmente patógenos, como <i>C. perfringens</i> e <i>S. aureus</i>.</li>
+<li><b>Leite:</b> microbiota do ambiente, com <i>Pseudomonas</i>, bactérias do ácido lático, leveduras, coliformes e esporuladas. Pode haver infecção (mastite) e patógenos como <i>Mycobacterium, Brucella, Salmonella</i> e <i>Coxiella</i>.</li>
+</ul>
+<h3>O que é fermentação</h3>
+<p class="box tip">Degradação <b>anaeróbia</b>, geradora de energia, de um nutriente como a glicose, <b>sem oxidação</b>. Produz lactato, etanol e outros produtos simples.</p>
+<p><b>Etapas:</b> a <b>glicólise</b> degrada a glicose em ácido pirúvico (com enzimas do citoplasma do microrganismo). Depois, a <b>redução do ácido pirúvico</b> leva aos produtos da fermentação.</p>
+<div class="wrap"><table>
+<tr><th>Tipo</th><th>Do ácido pirúvico sai</th><th>Exemplos</th></tr>
+<tr><td><b>Lática</b></td><td>ácido lático</td><td>iogurte, queijo</td></tr>
+<tr><td><b>Alcoólica</b></td><td>etanol + CO₂</td><td>vinho, cerveja, pão</td></tr>
+<tr><td><b>Acética</b></td><td>ácido acético (bactérias convertem o etanol)</td><td>vinagre</td></tr>
+</table></div>
+<h3>Fermentação alcoólica</h3>
+<ul>
+<li><b>Vinho:</b> a uva é colhida, esmagada e tratada com compostos de <b>enxofre</b>, que inibem microrganismos competidores das leveduras. O CO₂ sai (o vinho "ferve") e o etanol sobe. Perto de <b>12%</b>, o etanol fica tóxico para as leveduras e o processo para.</li>
+<li><b>Cerveja:</b> <i>Saccharomyces cerevisiae</i> fermenta os açúcares do malte da cevada (ou de outros cereais ricos em amido). Etapas: malteação, produção do mosto, adição de lúpulo, fermentação e maturação, filtragem e pasteurização.</li>
+<li><b>Pão:</b> <i>Saccharomyces cerevisiae</i>, a cerca de 27 °C. O amido vira açúcares simples e forma CO₂ e etanol, mas o <b>gás é o produto desejado</b>, porque faz a massa crescer. No forno, o calor evapora o etanol e mata as leveduras, interrompendo a fermentação.</li>
+</ul>
+<h3>Fermentação acética (vinagre)</h3>
+<p>Subproduto da fabricação do vinho, mas serve qualquer bebida alcoólica. Depois da fermentação alcoólica, bactérias (<i>Acetobacter, Gluconobacter</i>) convertem o etanol em ácido acético. O vinagre tem cerca de 4 a 14% de ácido acético.</p>
+<h3>Fermentação lática</h3>
+<ul>
+<li><b>Iogurte:</b> bactérias produzem ácido lático a partir da lactose. <i>Lactobacillus bulgaricus</i> e <i>Streptococcus thermophilus</i>, em cultura mista.</li>
+<li><b>Manteiga:</b> o creme é padronizado e pasteurizado, passa por maturação com cultura mesofílica (<i>S. cremoris, S. lactis, Leuconostoc</i>), batedura, lavagem, salga, malaxagem e embalagem.</li>
+<li><b>Queijo:</b> <i>Propionibacterium, Lactobacillus, Streptococcus</i> e <i>Leuconostoc</i>, em culturas puras ou mistas. O ácido lático aumenta a acidez e <b>coagula as proteínas do leite</b>, e outras substâncias dão aroma. Bactérias e fungos secundários dão sabores característicos, como nos <b>queijos azuis</b> (<i>Penicillium roqueforti</i>).</li>
+<li><b>Embutidos (produtos cárneos):</b> bactérias do ácido lático, em particular <i>Pediococcus cerevisiae</i>.</li>
+</ul>
+<h3>Vegetais e outros fermentados</h3>
+<div class="wrap"><table>
+<tr><th>Alimento</th><th>Microrganismos</th></tr>
+<tr><td><b>Chucrute</b></td><td><i>Enterobacter cloacae, Leuconostoc mesenteroides, Lactobacillus plantarum, L. brevis</i></td></tr>
+<tr><td><b>Picles</b></td><td><i>L. plantarum, L. mesenteroides, Enterococcus faecalis, Pediococcus cerevisiae</i>, além de <i>Pseudomonas, Flavobacterium, Bacillus</i> e leveduras</td></tr>
+<tr><td><b>Azeitonas</b></td><td><i>Leuconostoc</i></td></tr>
+<tr><td><b>Molho de soja (shoyu)</b></td><td><i>Aspergillus oryzae, Pediococcus soyae, Saccharomyces, Torulopsis, Lactobacillus</i></td></tr>
+<tr><td><b>Miso</b></td><td><i>Aspergillus oryzae</i></td></tr>
+<tr><td><b>Tempeh</b></td><td><i>Rhizopus</i></td></tr>
+<tr><td><b>Tofu</b></td><td><i>Mucor</i></td></tr>
+<tr><td><b>Natto</b></td><td><i>Bacillus subtilis</i></td></tr>
+<tr><td><b>Poi</b></td><td><i>Pseudomonas, Lactobacillus, Streptococcus, Leuconostoc, Geotrichum candidum</i></td></tr>
+</table></div>
+<h3>Kefir</h3>
+<p>Grãos de forma irregular, brancos ou amarelos, de consistência elástica. É uma <b>associação simbiótica</b> de leveduras e bactérias: bactérias láticas (<i>Lactobacillus, Lactococcus, Leuconostoc</i>), leveduras (<i>Saccharomyces cerevisiae</i>) e bactérias acéticas (<i>Acetobacter</i>). Feito de leite caprino ou bovino.</p>
+<h3>Kombucha</h3>
+<ul>
+<li>Fermentação conjunta e <b>simbiótica de fungos e bactérias</b> (lática, acética e alcoólica) sobre um chá adocicado, por 7 a 14 dias, a 18 a 28 °C. O chá é feito de <i>Camellia sinensis</i> (preto, verde, vermelho ou branco).</li>
+<li><b>SCOBY</b> = cultura simbiótica de bactérias e fungos. Parte dele inicia o próximo chá.</li>
+<li>Domina a <b>bactéria do ácido acético</b> (principalmente <i>Acetobacter</i>; também <i>Gluconacetobacter, Komagataeibacter, Lactobacillus</i>) com <b>leveduras osmofílicas</b>.</li>
+<li>Forma ácidos orgânicos (a maior parte <b>acético</b>; também tartárico, málico, glucônico e glucurônico), pouco etanol, compostos fenólicos e CO₂.</li>
+<li>Algumas cepas de acetobactérias fazem uma <b>película de celulose</b> (beta-D-glicose com ligações beta-1,4), o biofilme que flutua no líquido.</li>
+<li>Sabor azedo, levemente adocicado e delicadamente gasoso. Depois de alguns dias parado, fica parecido com vinagre de vinho.</li>
+</ul>
+</section>
+
+<section id="simb"><h2>Probióticos, prebióticos e simbióticos</h2>
+<div class="grid">
+<div class="box"><span class="tag">Probiótico</span><p>Microrganismo <b>vivo</b> que melhora o equilíbrio da microbiota intestinal e faz bem à saúde. Do grego, "para vida".</p></div>
+<div class="box"><span class="tag">Prebiótico</span><p>Ingrediente alimentar <b>não digerível</b> que estimula seletivamente o crescimento ou a atividade de bactérias benéficas do cólon.</p></div>
+<div class="box"><span class="tag">Simbiótico</span><p>Produto que <b>combina</b> probiótico e prebiótico. Ex.: iogurtes, bebidas lácteas fermentadas, suplementos, fármacos, sucos de frutas e legumes fermentados.</p></div>
+</div>
+<h3>Saúde intestinal</h3>
+<p>São cerca de <b>100 trilhões de bactérias</b>, de mais de 400 espécies. Bifidobactérias e patógenos podem viver em equilíbrio. A quantidade de bactérias cresce ao longo do trato: o estômago e o duodeno têm pouquíssimas (ácido, bile e secreções as eliminam, e predominam lactobacilos e estreptococos), o jejuno e o íleo têm cada vez mais, e o <b>intestino grosso é o mais denso</b>, com anaeróbios.</p>
+<p><b>Desequilibram a microbiota:</b> alimentação desequilibrada, álcool, fumo, infecção bacteriana, idade, medicamentos (antibióticos), estresse e fadiga.</p>
+<h3>Prebióticos</h3>
+<ul>
+<li><b>Exemplos:</b> xilitol, oligossacarídeos não digeríveis (frutooligossacarídeos, <b>FOS</b>), <b>inulina</b>, pectina e fibras (solúveis e insolúveis). Estão em frutas, vegetais, leite e mel.</li>
+<li><b>Atividade bifidogênica:</b> estimulam as bifidobactérias, que suprimem bactérias putrefativas (que formam produtos tóxicos) e inibem a <i>E. coli</i>. Assim, as bactérias promotoras de saúde se tornam maioria no cólon.</li>
+<li><b>Benefícios:</b> mais absorção de cálcio, menos translocação bacteriana, menor risco de câncer de cólon, mais massa fecal e frequência de evacuação, menos constipação.</li>
+</ul>
+<div class="wrap"><table>
+<tr><th></th><th>Fibras solúveis</th><th>Fibras insolúveis</th></tr>
+<tr><td><b>Na água</b></td><td>dissolvem e formam gel viscoso</td><td>não absorvem água</td></tr>
+<tr><td><b>O que fazem</b></td><td>mais saciedade e menos apetite; hidratam o bolo fecal (úteis na diarreia e na prisão de ventre); reduzem LDL, colesterol total e triglicerídeos; diminuem a absorção de glicose e gordura; servem de alimento para bactérias boas</td><td>melhoram o trânsito intestinal e combatem a prisão de ventre (aumentam o volume das fezes e estimulam os movimentos peristálticos); previnem hemorroidas e câncer de cólon; reduzem o contato do intestino com substâncias tóxicas; ajudam a emagrecer</td></tr>
+<tr><td><b>Fontes</b></td><td>frutas, cereais, legumes e vegetais (aveia, feijão, abacate)</td><td>farelo de trigo, arroz integral, feijão, cereais integrais, pera, ameixa com casca, laranja e tangerina</td></tr>
+</table></div>
+<p><b>Recomendação diária total de fibras:</b> 25 g para mulheres adultas e 38 g para homens adultos.</p>
+<h3>Probióticos</h3>
+<ul>
+<li><b>Exemplos:</b> <i>Lactobacillus acidophilus</i> e <i>Bifidobacterium bifidum</i>.</li>
+<li><b>Dose:</b> deve ser <b>diária</b>. Em adultos, 5 bilhões de UFC por dia (5 × 10⁹), por pelo menos 5 dias. Os efeitos terapêuticos aparecem em doses variáveis de 10⁶ a 10⁹ UFC. Na prática, 2 a 3 iogurtes com culturas probióticas por dia, mas a concentração varia muito e não há padrão de identidade.</li>
+<li><b>Crianças:</b> o momento indicado é a instalação da microbiota do lactente, entre <b>18 e 24 meses</b>, quando ela é mais simples, estável e muito influenciada pela nutrição. Ainda não há recomendação pediátrica estabelecida. Estudos são promissores em gastroenterite aguda, doença inflamatória intestinal e alergias.</li>
+<li><b>Características desejadas:</b> resistir ao ácido do estômago, à bile e às enzimas pancreáticas; aderir às células da mucosa; colonizar; produzir substâncias antimicrobianas contra patógenos; não sofrer translocação.</li>
+<li><b>Critérios de seleção:</b> resistência ao suco gástrico e à bile, resistência à lisozima, capacidade de aderir à mucosa e número elevado no produto (mais de 10⁷ UFC/mL), resistindo ao processamento.</li>
+<li><b>Como agem:</b> melhoram a barreira epitelial, aderem à mucosa, impedem a entrada de patógenos, excluem patógenos por competição, produzem substâncias antimicrobianas e modulam o sistema imune.</li>
+<li><b>Benefícios:</b> proteção imunológica, saúde intestinal, efeito anticarcinogênico, diminuem o colesterol, tratam e previnem diarreia e melhoram a digestão da lactose.</li>
+</ul>
+</section>
+
+</div></div>
+
+<div class="view" id="sim">
+<section><h2>Simulados</h2>
+<div id="shome"><p class="intro">Escolha um assunto ou faça o simulado prova, que mistura tudo. Cada simulado tem 10 questões: 8 fechadas e 2 abertas.</p><div id="scards"></div></div>
+<div id="run" style="display:none">
+<button class="back on" id="sback">‹ Todos os simulados</button>
+<h3 id="stitle" style="margin:6px 0 0"></h3>
+<div id="slist"></div>
+<div id="score" aria-live="polite">0 / 10</div>
+<p><button class="btn" id="nsim">Refazer</button></p>
+</div>
+</section>
+</div>
+</main>
+<footer><div class="in">Baseado nos slides da profa. Maria Clara Pestana Calsa. Quando houve diferença, valeu o slide.</div></footer>
+
+<script>
+// fechadas: [tema, pergunta, CORRETA, errada, errada, errada, explicação]
+var C=[
+["ODS","O ODS 2 trata de:","Fome zero e agricultura sustentável","Consumo e produção sustentáveis","Água potável e saneamento","Saúde e bem-estar","Objetivo 2 = fome zero. O de consumo e produção sustentáveis é o 12."],
+["ODS","Uma das metas do ODS 12 é:","Reduzir pela metade o desperdício de alimentos per capita","Zerar a exportação de alimentos","Aumentar o uso de agrotóxicos","Eliminar a agricultura","Também inclui reduzir perdas na cadeia, inclusive pós-colheita."],
+["História","A produção de alimentos começou há cerca de:","8 a 10 mil anos","800 anos","80 mil anos","2 mil anos","Antes disso, o ser humano só caçava e coletava."],
+["História","O que a domesticação de plantas e animais provocou?","O ser humano deixou de ser nômade e formou aldeias","Fim das doenças de origem alimentar","Fim da agricultura","Aumento da caça","Fixar-se deu origem às aldeias e depois às cidades."],
+["História","Segundo a FAO, há segurança alimentar quando todos têm acesso a alimentos:","Suficientes, seguros e nutritivos","Baratos e industrializados","Apenas em quantidade suficiente","Somente importados","Não basta ter comida: precisa ser segura e nutritiva."],
+["História","Qual NÃO é uma das 4 dimensões da segurança alimentar?","Exportação","Estabilidade","Disponibilidade","Utilização","São: estabilidade, disponibilidade, distribuição e utilização."],
+["Shelf life","Por que a validade pela análise sensorial costuma ser MENOR que a microbiológica?","Textura, odor e sabor mudam antes de o alimento estar estragado","Porque conta bactérias","Porque usa cultura em placas","Porque ignora o sabor","A sensorial mostra quando deixa de ser agradável; a micro, quando deixa de ser seguro."],
+["Shelf life","Alimento com validade de até 90 dias deve trazer no rótulo:","Dia e mês","Só o ano","Só o mês","Nada","Acima de 90 dias pode ser só mês e ano (RDC 259)."],
+["Intrínsecos","Qual é um fator intrínseco?","Atividade de água","Temperatura de armazenamento","Umidade relativa do ambiente","Composição gasosa","Aa, pH, nutrientes e antimicrobianos são do alimento."],
+["Intrínsecos","Alimento de baixa acidez tem pH:","Acima de 4,5","Abaixo de 4,0","Entre 4,0 e 4,5","Igual a 2,0","4,5 é o pH mínimo do C. botulinum; abaixo de 4,0 quase só bolores e leveduras crescem."],
+["Intrínsecos","Abaixo de Aa 0,60, os microrganismos:","Não se multiplicam, mas podem ficar viáveis por muito tempo","Se multiplicam rapidamente","Morrem imediatamente","Produzem mais toxinas","Ex.: chocolate, mel, leite em pó."],
+["Intrínsecos","Qual a única bactéria patogênica que cresce entre Aa 0,93 e 0,85?","Staphylococcus aureus","Salmonella","Escherichia coli","Listeria","Nessa faixa também crescem bolores produtores de micotoxinas."],
+["Intrínsecos","A clara do ovo tem lisozima, que:","Destrói a parede celular das bactérias","Aumenta o pH","Fornece carbono","Produz toxinas","É um constituinte antimicrobiano natural."],
+["Extrínsecos","A maioria dos microrganismos de importância em alimentos é:","Mesófila (25 a 40 °C)","Psicrófila","Termófila","Hipertermófila","Termófilos (45 a 60 °C) incluem Bacillus e Clostridium."],
+["Extrínsecos","Alimento de Aa baixa em ambiente de UR alta tende a:","Absorver umidade e ter a Aa aumentada","Perder água e ficar mais seco","Não mudar","Esterilizar","Por isso o armazenamento importa. UR = Aa × 100."],
+["Extrínsecos","A teoria dos obstáculos de Leistner diz que:","A conservação vem da combinação de vários fatores","Só a temperatura conserva","Só o pH conserva","Obstáculos aumentam a deterioração","Combinar barreiras potencializa o efeito de cada uma."],
+["Extrínsecos","Atmosfera rica em CO₂ na carne favorece:","Lactobacillus, inibindo Gram-negativas","Pseudomonas","Bolores","Salmonella","O CO₂ barra as Gram-negativas."],
+["Deteriorantes","Qual grupo se 'disfarça' melhor no alimento?","Patogênicos","Deteriorantes","Nenhum","Todos igualmente","Deteriorantes mudam sabor, odor e textura."],
+["Deteriorantes","A deterioração por bolores é percebida por:","Crescimento visível de colônias na superfície","Ausência de mudança","Só pelo pH","Só no laboratório","Alguns ainda produzem micotoxinas."],
+["Perigos","Um pedaço de vidro no alimento é perigo:","Físico","Químico","Biológico","Sensorial","Corpos estranhos são físicos."],
+["Perigos","Resíduo de pesticida no alimento é perigo:","Químico","Físico","Biológico","Térmico","Também: produtos de limpeza, antibióticos, aditivos tóxicos."],
+["Perigos","Contaminação cruzada é:","Transferência de patógenos entre materiais, superfícies e alimentos","Cozimento inadequado","Falta de rótulo","Uso de conservantes","Ex.: tábua ou utensílio usado em cru e depois em pronto."],
+["DTA","Ingerir Salmonella viva que se multiplica no intestino e invade tecidos é:","Infecção","Intoxicação","Toxinfecção","Alergia","Infecção = multiplicação do patógeno no organismo."],
+["DTA","Toxina do S. aureus já formada no alimento causa:","Intoxicação","Infecção","Toxinfecção","Contaminação cruzada","Intoxicação: a toxina já está no alimento."],
+["DTA","C. perfringens e B. cereus (forma diarreica) causam:","Toxinfecção","Intoxicação","Infecção","Alergia","Produzem/liberam toxina no intestino, depois de ingeridos."],
+["DTA","A faixa de temperatura mais crítica para multiplicação de patógenos é:","20 a 50 °C","0 a 4 °C","Acima de 60 °C","Abaixo de 10 °C","Seguro: abaixo de 10 °C (ideal até 4) ou acima de 60 °C."],
+["DTA","Qual NÃO é etapa da DTA?","Pasteurização","Contaminação","Multiplicação","Ingestão","São: contaminação, multiplicação, sobrevivência e ingestão."],
+["Análise micro","Qual é indicador de contaminação fecal?","Escherichia coli","Vitamina C","Bolores","Lactobacillus","Também coliformes a 45 °C e C. perfringens."],
+["Análise micro","Falta de higiene tende a aumentar a contagem de:","Enterobactérias","Vitaminas","Fibras","Antioxidantes","São indicadoras de falha de higiene."],
+["Análise micro","Meios de cultura são:","Artificiais e preparados para selecionar o tipo de microrganismo","Naturais e iguais para todos","Só para vírus","Um tipo de embalagem","Feitos em laboratório, conforme o que se quer isolar."],
+["Shelf life","Quem é responsável por regulamentar e fiscalizar produtos que envolvem risco à saúde pública, como embalagens de alimentos?","Anvisa","FAO","CDC","Rede Penssan","Atribuição da Anvisa, pelo artigo 8º da Lei 9.782/99."],
+["Intrínsecos","O pH mínimo para multiplicação e produção de toxina do Clostridium botulinum é:","4,5","4,0","6,5","7,5","Esse valor é a base para separar alimentos de baixa acidez dos ácidos."],
+["Intrínsecos","Aeróbios, como a maioria dos bolores e as Pseudomonas, precisam de:","Eh (potencial redox) positivo","Eh baixo","Ausência total de nutrientes","pH abaixo de 2","Anaeróbios é que exigem Eh baixo."],
+["Extrínsecos","Os microrganismos anaeróbios facultativos:","Vivem com ou sem oxigênio e são a maioria das espécies de interesse na indústria","Só vivem sem oxigênio","Só vivem na superfície do alimento","Morrem em qualquer temperatura","Os aeróbios estritos crescem na superfície formando película."],
+["Extrínsecos","Atmosfera modificada é:","Substituição total ou parcial do oxigênio por outros gases na embalagem","Uso de sal","Congelamento rápido","Adição de açúcar","Ex.: vácuo ou combinações de O₂, N₂ e CO₂."],
+["Deteriorantes","Os bolores crescem em uma faixa de pH de:","2,0 a 9,0","6,5 a 7,5","4,0 a 4,5","Só acima de 9","Resistem bem à desidratação e exigem oxigênio."],
+["Perigos","Os perigos em alimentos são controlados pelo sistema:","APPCC, com as Boas Práticas como pré-requisito","Somente pela análise sensorial","Pelo rótulo do produto","Pela pasteurização apenas","Os perigos são classificados em biológicos, químicos e físicos."],
+["DTA","Os microrganismos patogênicos não esporulados são destruídos:","Na temperatura de cocção","Na geladeira","Em ambiente de UR alta","Com o reaquecimento a 30 °C","Falha na cocção ou na sanitização permite a sobrevivência."],
+["DTA","No caso de manutenção a quente, a temperatura segura é:","Acima de 60 °C","Entre 20 e 50 °C","Abaixo de 10 °C","Em torno de 37 °C","Na manutenção a frio: abaixo de 10 °C, de preferência até 4 °C."],
+["Análise micro","Qual dos itens abaixo é um parâmetro da análise microbiológica citado nos slides?","Bactérias mesófilas totais","Teor de açúcar","Cor da embalagem","Peso do produto","Também: coliformes, Salmonella, S. aureus, bolores e leveduras, B. cereus."],
+["ODS","Quantos dos 17 ODS os slides citam como apoiados por melhorias no sistema agroalimentar?","Dois: o ODS 2 e o ODS 12","Um só","Cinco","Todos os 17","O ODS 2 (Fome Zero e Agricultura Sustentável) e o ODS 12 (Consumo e Produção Sustentáveis)."],
+["ODS","As metas do ODS 2 e do ODS 12 citadas nos slides têm prazo até:","2030","2025","2040","2050","Ambos falam em metas até 2030."],
+["ODS","A meta do ODS 12 sobre desperdício mira os níveis de:","Varejo e consumidor","Somente o produtor rural","Apenas a exportação","Só a indústria","Também inclui as perdas ao longo das cadeias de produção e abastecimento, com as pós-colheita."],
+["ODS","Uma das metas do ODS 2 é implementar práticas agrícolas:","Resilientes, que mantêm ecossistemas e ajudam na adaptação ao clima","Que aumentem o uso de agrotóxicos","Que dispensem o cuidado com o solo","Voltadas só à exportação","Ela fala em resistência a seca, inundação e clima extremo, melhorando a qualidade da terra e do solo."],
+["ODS","O ODS 2 pretende acabar com:","Todas as formas de fome e má-nutrição","Só a desnutrição infantil","Somente o desperdício","A agricultura familiar","Garantir que todos tenham acesso suficiente a alimentos nutritivos."],
+["ODS","O ODS 12 também prevê apoiar países em desenvolvimento a:","Fortalecer capacidades científicas e tecnológicas para padrões mais sustentáveis","Reduzir a produção de alimentos","Importar mais alimentos","Aumentar as perdas pós-colheita","É uma meta de apoio à mudança para produção e consumo mais sustentáveis."],
+["História","Em que contexto o termo 'segurança alimentar' começou a ser usado, segundo os slides?","Na Europa, durante a 1ª Guerra Mundial, com o aumento da fome","Na Revolução Industrial","Na pandemia de 2020","Na Roma Antiga","Depois disso se tornou recorrente e levou à criação da FAO."],
+["História","A FAO foi criada em:","1945","1918","1948","2004","Em 1948 veio a Declaração Universal dos Direitos Humanos, que reconheceu a alimentação como direito básico."],
+["História","O Dia Mundial da Alimentação é comemorado em:","16 de outubro","1º de maio","5 de junho","7 de abril","Foi instituído pela FAO, com base em nutrição, produção de alimentos, ambiente e qualidade de vida."],
+["História","O 'vomitarium' romano, para vomitar e continuar comendo, é:","Um mito, sem provas","Um fato comprovado","Uma prática só dos soldados","Um tipo de prato","Comer deitado é que era símbolo de distinção."],
+["Shelf life","Na análise microbiológica do shelf life, as amostras:","São coletadas com um dia de diferença e cultivadas para contar bactérias","São provadas por um grupo de pessoas","São só observadas a olho nu","São congeladas sem análise","Assim se descobre quando o alimento perde a segurança."],
+["Shelf life","Na análise sensorial, o alimento é:","Experimentado a cada dia por um grupo que dá notas","Cultivado em placas","Sequenciado por DNA","Avaliado só pelo pH","Ela mostra o ponto em que deixa de ser apetitoso."],
+["Shelf life","Qual expressão o rótulo pode usar para declarar a validade?","Consumir antes de","Bom até quando der","Aprovado pelo mercado","Uso livre","Outras: válido até, validade, vencimento, val., vto e venc."],
+["Shelf life","Alimentos com muito açúcar, pouca água e pH ácido tendem a ter vida útil:","Mais longa","Mais curta","Igual à dos demais","Nula","Já os de muita água e nutrientes são mais suscetíveis à deterioração microbiológica."],
+["Shelf life","Uma vantagem do shelf life para o consumidor é:","Garantir segurança alimentar e permitir planejar refeições e compras","Aumentar o desperdício","Dispensar o rótulo","Eliminar a refrigeração","Também mantém sabor, textura e aparência por mais tempo."],
+["Intrínsecos","Qual constituinte antimicrobiano age principalmente contra fungos na amora?","Ácido benzoico","Lisozima","Eugenol","Aldeído cinâmico","Lisozima é do ovo, eugenol do cravo e aldeído cinâmico da canela."],
+["Extrínsecos","Acima da temperatura máxima de crescimento ocorre:","Desnaturação das proteínas estruturais e morte","Aumento da multiplicação","Só formação de esporos","Queda do pH","A temperatura ótima é a da multiplicação mais rápida."],
+["Extrínsecos","Atmosferas com cerca de 10% de CO₂ são usadas para conservar:","Frutas como pêras, maçãs e pêssegos","Óleos e gorduras","Leite em pó","Carnes curadas","Há competição com o etileno."],
+["Deteriorantes","A mesma espécie de levedura (Saccharomyces) pode:","Ser útil na cerveja e deteriorante em suco de fruta","Só deteriorar","Só ser útil","Ser sempre patogênica","Depende do tipo de alimento e das suas características."],
+["Deteriorantes","As enzimas envolvidas na deterioração são:","Proteínas sem vida própria que agem como catalisadores","Bactérias esporuladas","Fungos filamentosos","Toxinas","Agem junto com a atividade bacteriana e sua ação é específica para cada reação."],
+["Deteriorantes","Alimento enlatado comercialmente estéril:","Não tem microrganismos capazes de deteriorar, mas não é esterilidade absoluta","Não tem nenhuma célula viva","Estraga em qualquer condição","É o mesmo que pasteurizado","Células viáveis ainda podem ser recuperadas."],
+["Deteriorantes","A corrosão interna da lata, com liberação de hidrogênio e estufamento, é problema:","Químico","Físico","Microbiológico","Sensorial","O enchimento excessivo é problema físico."],
+["Deteriorantes","Quanto à suscetibilidade à deterioração, os alimentos se dividem em:","Perecíveis, semi-perecíveis e estáveis","Ácidos e básicos","Crus e cozidos","Frescos e congelados","Baseia-se na composição final, no processamento e no armazenamento."],
+["Perigos","Qual é exemplo de perigo biológico?","Bactérias, fungos, vírus e parasitas","Vidro e metal","Pesticidas","Produtos de limpeza","Os biológicos causam a maioria dos surtos, sobretudo as bactérias patogênicas e suas toxinas."],
+["Perigos","Toxinas fúngicas e antibióticos são perigos:","Químicos","Físicos","Biológicos","Térmicos","Também: pesticidas, herbicidas, aditivos tóxicos e produtos de limpeza."],
+["Perigos","Qual destas foi citada como causa de contaminação?","Higienização ineficiente e falha humana","Embalagem transparente","Freezer com baixa temperatura","Rótulo em letra grande","Também: falhas em processos e insumos ou equipamentos contaminados."],
+["Perigos","Um alimento cozido que recebe patógenos de novo sofreu:","Contaminação cruzada","Esterilização comercial","Pasteurização","Sanitização","Ocorre por superfícies, utensílios ou alimentos crus."],
+["DTA","Qual grupo microbiano tem a maior incidência nas DTAs?","Bactérias","Protozoários","Leveduras","Bolores","Por sua grande diversidade e virulência."],
+["Análise micro","O habitat exclusivo de um indicador ideal de contaminação fecal é:","O trato intestinal do homem e de animais de sangue quente","O solo","A água doce","A superfície das frutas","Também deve estar em grande número nas fezes e resistir ao ambiente extra-intestinal."],
+["Análise micro","Os coliformes totais pertencem à família:","Enterobacteriaceae","Bacillaceae","Lactobacillaceae","Clostridiaceae","Gêneros: Escherichia, Klebsiella, Enterobacter e Citrobacter."],
+["Análise micro","O sequenciamento de DNA na análise de alimentos também permite:","Identificar fraudes","Medir o pH","Contar mesófilos em placa","Dispensar a Anvisa","Detecta bactérias patogênicas ou deteriorantes em todo tipo de alimento."],
+["Análise micro","Quem deve fazer análises microbiológicas periódicas em laboratório habilitado pela Anvisa?","Produtores de alimentos, restaurantes e hospitais","Só indústrias exportadoras","Apenas os consumidores","Ninguém","Faz parte do controle de qualidade e da prevenção de DTA."]
+];
+// abertas: [tema, pergunta, gabarito]
+var O=[
+["História","Explique como o surgimento da agricultura mudou a vida humana e o que isso trouxe de problema para os alimentos.","Ao domesticar plantas e animais, o ser humano deixou de ser nômade, fixou-se, formou aldeias e cidades e teve tempo para outras atividades. Com alimento preparado e armazenado, surgiram a deterioração, a toxicidade e a transmissão de doenças, sobretudo por armazenamento inadequado."],
+["ODS","Diferencie ODS 2 e ODS 12.","ODS 2: fome zero e agricultura sustentável, acabar com a fome e a má-nutrição até 2030 com produção sustentável. ODS 12: consumo e produção sustentáveis, reduzir pela metade o desperdício per capita e as perdas na cadeia, inclusive pós-colheita."],
+["Shelf life","O que é shelf life e como se determina? Compare análise sensorial e microbiológica.","Shelf life é o tempo em que o alimento mantém segurança e qualidade entre produção e consumo. Microbiológica: cultura e contagem de bactérias em amostras de dias diferentes, mostra quando deixa de ser seguro. Sensorial: provadores dão notas, mostra quando deixa de ser agradável, e costuma dar prazo menor."],
+["Intrínsecos","Diferencie fatores intrínsecos e extrínsecos e dê exemplos de cada.","Intrínsecos são do alimento: atividade de água, pH, potencial redox, nutrientes e antimicrobianos naturais. Extrínsecos são do ambiente: temperatura, oxigênio, umidade relativa e composição gasosa."],
+["Extrínsecos","O que é a teoria dos obstáculos de Leistner?","Estuda a interação entre fatores intrínsecos e extrínsecos (temperatura, Aa, pH, potencial redox, conservantes, atmosfera modificada, microrganismos competidores). A ação conjunta de barreiras potencializa a conservação, aumenta a vida útil e impede deterioração e doenças."],
+["Deteriorantes","Diferencie microrganismos deteriorantes de patogênicos.","Deteriorantes alteram textura, sabor, odor e aparência, então não se disfarçam e causam perda de qualidade. Patogênicos quase não alteram o alimento, se disfarçam melhor e causam doença (DTA)."],
+["Perigos","Cite os três tipos de perigo em alimentos e dê exemplos.","Biológico: bactérias, fungos, vírus e parasitas (causam DTA). Químico: pesticidas, produtos de limpeza, toxinas fúngicas, antibióticos. Físico: vidro, metal, madeira, plástico, osso."],
+["DTA","Diferencie infecção, intoxicação e toxinfecção, com exemplos.","Infecção: ingere o microrganismo vivo, que se multiplica no intestino e invade tecidos (Salmonella). Intoxicação: ingere a toxina já formada no alimento (S. aureus, C. botulinum). Toxinfecção: ingere o microrganismo, que produz ou libera a toxina no intestino (C. perfringens, B. cereus diarreica)."],
+["DTA","Quais são as 4 etapas da DTA? Explique cada uma.","Contaminação (patógeno chega ao alimento), multiplicação (faixa crítica 20 a 50 °C), sobrevivência (resiste à cocção ou sanitização falha) e ingestão (idosos, crianças e debilitados são mais suscetíveis)."],
+["Análise micro","O que são meios de cultura e por que a E. coli e as enterobactérias são importantes na análise microbiológica?","Meios de cultura são artificiais e preparados para selecionar o tipo de microrganismo a ser cultivado. E. coli e enterobactérias (coliformes) são indicadores de contaminação fecal e de falha de higiene, ligados a DTA."],
+["História","O que é segurança alimentar segundo a FAO e quais são as 4 dimensões?","Todas as pessoas, o tempo todo, com acesso físico, social e econômico a alimentos suficientes, seguros e nutritivos, para uma vida ativa e saudável. Dimensões: estabilidade no acesso, disponibilidade, distribuição e utilização adequada dos alimentos."],
+["ODS","Explique a meta do ODS 12 sobre desperdício e por que o shelf life ajuda a alcançá-la.","A meta é reduzir pela metade o desperdício per capita no varejo e no consumidor e diminuir as perdas na cadeia, inclusive pós-colheita, até 2030. O shelf life prolonga a vida útil, dá mais tempo para distribuição e venda e reduz o desperdício e as perdas financeiras."],
+["Shelf life","Cite fatores que afetam o tempo de prateleira e formas de assegurar o shelf life de um produto.","Fatores: condições de armazenamento (temperatura, luz, umidade), composição (açúcar, água, pH) e processamento e embalagem. Para assegurar: embalagem adequada, cuidado na logística, rotulação clara, armazenamento adequado e seguir o guia de shelf life da Anvisa."],
+["Intrínsecos","Como os alimentos se classificam pelo pH e por que os valores 4,5 e 4,0 são usados?","Baixa acidez: pH acima de 4,5. Ácidos: entre 4,0 e 4,5. Muito ácidos: abaixo de 4,0. O 4,5 é o pH mínimo de multiplicação e produção de toxina do C. botulinum, e o 4,0 é o mínimo para a grande maioria das bactérias. Alimentos de baixa acidez são os mais sujeitos à multiplicação microbiana."],
+["Extrínsecos","Classifique os microrganismos pela temperatura ótima e diga o que ocorre acima da temperatura máxima.","Psicrófilos: 10 a 15 °C. Mesófilos: 25 a 40 °C, a maioria em alimentos. Termófilos: 45 a 60 °C (Bacillus e Clostridium). Hipertermófilos: acima de 60 °C. Acima da máxima, as proteínas estruturais desnaturam e o microrganismo morre."],
+["Deteriorantes","Compare a deterioração causada por bactérias, leveduras e bolores.","Bactérias usam carboidratos, substâncias nitrogenadas e lipídios, alterando química, física e sensorialmente o alimento. Leveduras podem ser úteis ou deteriorantes conforme o alimento (Saccharomyces). Bolores crescem de pH 2 a 9, resistem à desidratação, precisam de oxigênio, formam colônias visíveis e podem produzir micotoxinas."],
+["Perigos","O que é contaminação cruzada e quais causas de contaminação foram citadas?","É a transferência de microrganismos patogênicos entre materiais de produção, superfícies de contato e alimentos. Causas: falhas em processos ou protocolos, materiais, insumos ou equipamentos contaminados, falha humana e higienização ineficiente."],
+["Análise micro","Cite requisitos de um indicador ideal de contaminação fecal e exemplos de indicadores fecais.","Deve ter como habitat exclusivo o intestino de animais de sangue quente, ocorrer em grande número nas fezes, resistir ao ambiente extra-intestinal, estar presente quando o patógeno estiver e ser fácil de detectar. Exemplos: coliformes a 45 °C, E. coli e Clostridium perfringens."]
+];
+/* ===== FECHADAS NOVAS ===== */
+var NC=[
+/* --- Interesse --- */
+["Interesse","Quais são os quatro grupos de microrganismos de interesse em alimentos?","Deteriorantes, patogênicos, produtores de alimentos e indicadores","Aeróbios, anaeróbios, mesófilos e termófilos","Bactérias, vírus, fungos e parasitas","Intrínsecos, extrínsecos, físicos e químicos","A aula separa os microrganismos de interesse nesses quatro grupos."],
+["Interesse","A contaminação inicial de um alimento depende principalmente de:","Qualidade da matéria-prima e higiene de ambientes, manipuladores e superfícies","Temperatura de armazenamento e umidade relativa","Tipo de embalagem e rótulo","Número de gerações do microrganismo","Temperatura e umidade regulam a multiplicação, que vem depois da contaminação inicial."],
+["Interesse","Qual alimento é classificado como estável (não perecível)?","Açúcar","Carne","Leite","Ovos","Também a farinha. Carnes, pescados, ovos e leite são perecíveis."],
+["Interesse","Batatas, maçãs e nozes são exemplos de alimentos:","Semi-perecíveis","Estáveis","Perecíveis","Esterilizados","Semi-perecíveis ficam sem alteração se forem bem conservados e manipulados."],
+["Interesse","O ranço é um processo de deterioração de alimentos ricos em:","Gordura, por microrganismos lipolíticos que a quebram em ácidos graxos e glicerol","Proteína, por bactérias proteolíticas que liberam putrescina","Lactose, por bactérias do ácido lático","Açúcar, por leveduras que produzem etanol","Putrefação é nas proteínas e azedamento é na lactose do leite."],
+["Interesse","A putrefação de alimentos ricos em proteína, como a carne, libera:","Putrescina, cadaverina, H₂S e NH₃","Ácido lático e outros ácidos","Ácidos graxos e glicerol","Etanol e CO₂","É feita por bactérias proteolíticas."],
+["Interesse","No azedamento e coagulação do leite, as bactérias do ácido lático transformam:","Lactose em ácido lático e outros ácidos","Proteínas em putrescina","Gordura em ácidos graxos","Glicose em etanol","É por isso que o leite azeda e coagula."],
+["Interesse","Qual microrganismo é usado na produção de vinagre?","Acetobacter","Saccharomyces","Lactobacillus","Aspergillus niger","Saccharomyces dá bebidas alcoólicas e etanol, Lactobacillus dá ácido lático e Aspergillus niger dá ácido cítrico."],
+["Interesse","Um mesmo microrganismo pode:","Deteriorar um alimento e ser desejável em outro","Ser patogênico em todos os alimentos","Ser benéfico somente em carnes","Nunca estar presente no processo de produção","Ex.: a levedura Saccharomyces é útil na cerveja e deteriorante no suco de fruta."],
+["Interesse","Qual par está correto quanto ao tipo de DTA?","S. aureus libera toxina e Salmonella causa infecção","Salmonella libera toxina e S. aureus causa infecção","Listeria libera toxina e C. botulinum causa infecção","E. coli libera toxina e B. cereus causa infecção","Liberadores de toxina: S. aureus, C. perfringens, C. botulinum, V. cholerae e B. cereus. Infecção: Salmonella, E. coli, Shigella, Listeria, Yersinia e outros."],
+["Interesse","Qual produto é obtido com Penicillium chrysogenum?","Penicilina G","Goma xantana","Glutamato monossódico","Vitamina B12","Xanthomonas campestris faz goma xantana, Corynebacterium glutamicum faz glutamato e Propionibacterium faz B12."],
+["Interesse","Quais são fontes de contaminação microbiana dos alimentos citadas na aula?","Solo e água, utensílios, manipuladores, ar e poeira","Apenas os manipuladores","Somente o solo","Apenas o ar","Também plantas, trato intestinal de humanos e animais e vetores."],
+/* --- Indicadores --- */
+["Indicadores","O que é um microrganismo indicador?","Um grupo ou espécie cuja presença reflete a qualidade microbiológica do alimento, como contaminação fecal ou condições de higiene","Um microrganismo que sempre causa doença","Um microrganismo usado apenas para fermentar alimentos","Qualquer microrganismo que o laboratório consiga contar","Serve para refletir vida de prateleira e segurança alimentar."],
+["Indicadores","Por que não se pesquisa cada patógeno individualmente?","É difícil e antieconômico: são muitos, podem estar em baixa concentração e o isolamento leva dias ou semanas","Porque todos os patógenos crescem na mesma velocidade e são fáceis de contar","Porque a presença de um patógeno garante a presença de todos os outros","Porque os patógenos morrem sempre durante o transporte","Além disso, a ausência de um patógeno não implica a ausência de outro."],
+["Indicadores","Qual característica se espera de um bom indicador?","Ser de fácil e rápida detecção e facilmente diferenciado da microbiota presente","Crescer muito mais devagar que o patógeno","Ser detectado só quando o patógeno está ausente","Ser difícil de contar para evitar erros","Deve aparecer na presença do patógeno e crescer de modo equivalente."],
+["Indicadores","Qual característica torna a E. coli um bom indicador de contaminação fecal?","Habitat exclusivo no intestino de homem e animais de sangue quente, número elevado nas fezes e alta resistência fora do intestino","Vive livre no solo e nas plantas","Não é encontrada nas fezes","Forma esporos e é sempre patogênica","Ainda tem técnicas de detecção rápidas, simples e precisas."],
+["Indicadores","Os coliformes totais são bactérias:","Gram-negativas, não esporuladas, em bastonete, que fermentam lactose com ácido e gás","Gram-positivas, esporuladas e anaeróbias estritas","Em forma de cocos, que não fermentam lactose","Fungos filamentosos produtores de micotoxinas","Pertencem às Enterobacteriaceae (Escherichia, Klebsiella, Citrobacter e Enterobacter)."],
+["Indicadores","A diferença entre coliformes totais e termotolerantes está na:","Temperatura em que fermentam a lactose: 35 a 37 °C para os totais e 44 a 45,5 °C para os termotolerantes","Cor das colônias","Formação de esporos","Fonte de carbono: só os termotolerantes usam lactose","Os termotolerantes são Escherichia e algumas cepas de Enterobacter e Klebsiella."],
+["Indicadores","A presença de coliformes totais em um alimento processado indica principalmente:","Falhas de higiene, como contaminação pós-processamento ou sanificação e tratamento térmico deficientes","Que o alimento é fermentado","Que o alimento é estável","Presença de micotoxinas","Resumo da aula: a presença de coliformes totais indica sujeira."],
+["Indicadores","Sobre coliformes e E. coli, qual afirmação está de acordo com a aula?","Coliformes não causam doença, mas E. coli no alimento indica risco, pois patógenos entéricos podem estar presentes","Toda E. coli é patogênica","Coliformes são a principal causa de DTA","A E. coli só existe em vegetais","A porcentagem de E. coli patogênica é pequena em relação às não patogênicas."],
+["Indicadores","Número elevado de Enterobacteriaceae em vegetais in natura:","É esperado e não indica risco do produto","Indica contaminação fecal certa","Indica falha no tratamento térmico","Indica micotoxinas","Já em alimentos pasteurizados, populações altas indicam falhas higiênicas."],
+["Indicadores","Presença de bolores em equipamentos indica:","Qualidade da sanificação das operações e perigo de micotoxinas","Falha na higienização dos manipuladores","Presença de Salmonella","Excesso de coliformes","A presença de leveduras é que pode indicar falha de higienização dos manipuladores."],
+["Indicadores","Para uma bactéria ser contada na contagem de mesófilos em placa, ela precisa:","Ser capaz de se multiplicar no meio e na temperatura usados","Ser patogênica","Ser anaeróbia estrita","Formar esporos","A contagem depende de meios, temperaturas e quantidades determinados, então só se contam as que crescem nessas condições."],
+["Indicadores","Número elevado de mesófilos em um alimento perecível sugere:","Abuso no armazenamento, com tempo e temperatura inadequados","Que o alimento é fermentado","Que o alimento é estável","Ausência de patógenos","Quase todas as bactérias patogênicas de origem alimentar e muitas deteriorantes são mesófilas."],
+["Indicadores","Clostrídios sulfito redutores indicam a possível presença de:","C. perfringens e C. botulinum","Salmonella e Shigella","E. coli e Klebsiella","Lactobacillus e Bacillus","São esporulados, perigo potencial, e não específicos de fezes humanas."],
+["Indicadores","Com relação a grupos de microrganismos indicadores, analise: 1. A presença de coliformes (Escherichia, Enterobacter, Klebsiella e Citrobacter) expressa as condições higiênicas de alimentos, mas não é um bom indicador de contaminação fecal, PORQUE 2. somente a Escherichia coli tem como habitat exclusivo o trato gastrointestinal do homem e de animais, e os demais gêneros podem ser achados em plantas e solo. Assinale a opção correta.","As duas asserções são verdadeiras, e a segunda justifica a primeira","As duas asserções são falsas","A primeira é verdadeira e a segunda é falsa","As duas são verdadeiras, mas a segunda não justifica a primeira","Como só a E. coli é exclusiva do intestino, o grupo todo não indica contaminação fecal com segurança. Questão da enquete da aula."],
+/* --- Carne --- */
+["Carne","Segundo a aula, carne é:","A parte comestível de bovinos, búfalos, ovinos, caprinos, suínos, equinos, coelhos, aves, rãs e peixes, incluindo tecido muscular e órgãos","Apenas o músculo de bovinos","Somente a carne vermelha de animais de grande porte","Todo produto de origem animal, incluindo leite e ovos","Inclui tecido muscular e órgãos."],
+["Carne","Rastreabilidade na cadeia da carne é:","A capacidade de acompanhar o alimento pelos estágios de produção, transformação e distribuição, do campo à mesa","A medição do pH da carne após o abate","A contagem de microrganismos na carcaça","O tempo de validade do produto","Tem como objetivo a transparência na cadeia da carne."],
+["Carne","Os dois tipos de contaminação da carne são:","Endógena (animal vivo) e exógena (invasão post-mortem)","Física e química","Aeróbia e anaeróbia","Mecânica e térmica","Ambas são prejudiciais, mas as exógenas são mais frequentes."],
+["Carne","Qual contaminação da carne é mais frequente?","Exógena","Endógena","As duas ocorrem com a mesma frequência","Nenhuma, porque a carne fresca não tem microrganismos","A endógena vem do animal vivo, quando bactérias intestinais invadem tecidos pela corrente sanguínea."],
+["Carne","Qual NÃO é fonte de contaminação nos matadouros citada na aula?","Embalagem a vácuo do produto final","Peles e pelos com sujeira e fezes","Água de lavagem de carcaças, equipamentos e utensílios","Mão de obra","Também são fontes: ar e poeira, transporte (ferimentos, contusões) e animais sujos."],
+["Carne","Qual bactéria é Gram-positiva, esférica (cacho de uva), tem toxina e vive na pele e nas mucosas nasais?","Staphylococcus aureus","Salmonella","Clostridium perfringens","Escherichia coli","Causa náuseas, vômitos e diarreia."],
+["Carne","Qual bactéria é Gram-positiva, em bastonete, formadora de esporos, anaeróbia e imóvel, e causa dores abdominais intensas, gases e diarreia?","Clostridium perfringens","Salmonella","Staphylococcus aureus","Escherichia coli","Produz toxinas."],
+["Carne","Qual bactéria Gram-negativa, em bastonete e sem esporos, causa diarreia no homem e é transmitida por alimentos crus e mal cozidos ou água com material fecal?","Salmonella","Staphylococcus aureus","Clostridium perfringens","Micrococcus","Vive em humanos e animais domésticos."],
+["Carne","A limosidade superficial da carne fresca refrigerada, com muita água, é causada principalmente por:","Pseudomonas e Alcaligenes","Micrococos e leveduras","Clostridium","Lactobacillus","Micrococos e leveduras aparecem em produtos de menor atividade de água, como salsichas e linguiças."],
+["Carne","A putrefação da carne em anaerobiose é:","A decomposição anaeróbia das proteínas, com H₂S, putrescina e cadaverina, pelo gênero Clostridium","O acúmulo de ácidos orgânicos por coliformes","O crescimento de bolores na superfície","A perda de água por evaporação","Faz parte da deterioração profunda."],
+["Carne","Por que a carne moída é muito mais suscetível ao desenvolvimento de microrganismos?","Porque na moagem os microrganismos são distribuídos por toda a massa","Porque a moagem esteriliza a carne","Porque ela contém menos água","Porque ela é sempre armazenada congelada","Na peça inteira, a contaminação fica mais na superfície."],
+["Carne","O resfriamento da carne com ar frio a 4 a 7 °C e UR de 90 a 95% dá vida útil de cerca de:","7 dias","24 horas","3 a 4 semanas","6 meses","Com ar frio a -1,5 °C, a vida útil passa a 3 a 4 semanas."],
+["Carne","Qual alteração é típica do congelamento da carne?","Queimadura pelo frio e dessecação da superfície","Contaminação óssea por bactérias putrefativas","Absorção de odores estranhos","Decomposição por psicrófilos e fungos","Os outros três itens são alterações do resfriamento."],
+["Carne","Na refrigeração, os microrganismos que continuam crescendo são os:","Psicrotolerantes (psicrotróficos)","Termófilos","Hipertermófilos","Nenhum, pois todos morrem","Por isso a temperatura adequada é essencial."],
+["Carne","A secagem conserva a carne porque:","Reduz a atividade de água, e a falta de água inibe o crescimento microbiano","Aumenta a atividade de água","Esteriliza o alimento","Aumenta o pH","Sol, câmaras de secagem e liofilização são formas de secagem."],
+["Carne","A adição de sal ou açúcar conserva o alimento porque:","Aumenta a pressão osmótica","Diminui a pressão osmótica","Aumenta a atividade de água","Aumenta a quantidade de oxigênio","É a adição de solutos: açúcar em doces e frutas secas, sal em carnes e peixes."],
+["Carne","Em frango eviscerado mantido a 10 °C ou menos, a deterioração é principalmente por:","Pseudomonas","Alcaligenes e Flavobacterium","Clostridium","Lactobacillus","Acima de 10 °C crescem Alcaligenes spp. e Flavobacterium spp."],
+/* --- Pescado e ovos --- */
+["Pescado e ovos","Por que o pescado se deteriora rapidamente?","Pela composição química, gorduras insaturadas facilmente oxidáveis e pH próximo da neutralidade","Porque é rico em fibras","Porque tem pH muito ácido","Porque nunca tem bactérias","Também há autólise e atividade bacteriana."],
+["Pescado e ovos","Quais são os processos de deterioração do pescado citados na aula?","Autólise, alterações de aroma e cor e atividade bacteriana, ou a combinação dos três","Somente ação de fungos","Apenas oxidação do ferro","Apenas o congelamento","Na autólise, os sucos digestivos e as enzimas dos tecidos amolecem e desintegram a carne."],
+["Pescado e ovos","Qual parte do peixe é mais suscetível e dá os sinais mais precoces de alteração?","A região branquial (guelras), pelo mau odor","A cauda, pela cor","Os olhos, pelo brilho","A barbatana, pela textura","As bactérias ficam principalmente no trato digestivo, nas guelras e no muco superficial."],
+["Pescado e ovos","Em águas frias, a microbiota do pescado é formada principalmente por:","Psicrófilos, como Pseudomonas, Alteromonas, Moraxella, Acinetobacter, Flavobacterium e Vibrio","Gram-positivos mesófilos, como Micrococcus e Bacillus","Termófilos, como Clostridium","Somente fungos","Os Gram-positivos mesófilos (Micrococcus e Bacillus) são os de águas quentes."],
+["Pescado e ovos","A reação de Éber serve para avaliar:","O frescor do pescado, pelo H₂S da decomposição bacteriana, com acetato de chumbo","O pH do ovo","A quantidade de gordura do peixe","A presença de Salmonella","O resultado positivo é uma mancha preta espelhada (sulfeto de chumbo) no papel de filtro."],
+["Pescado e ovos","Em um peixe fresco, os olhos são:","Claros, brilhantes, convexos e transparentes","Vidrosos, opacos e côncavos","Opacos, com manchas na íris","Fundos e secos","Olhos vidrosos, opacos e côncavos indicam peixe avariado."],
+["Pescado e ovos","Qual característica indica peixe avariado?","Brânquias cinzentas ou cor de chumbo, secas","Escamas aderentes e brilhantes","Carne firme, branca ou rosa","Ânus fechado","No fresco, as brânquias são róseas ou vermelhas, úmidas e brilhantes."],
+["Pescado e ovos","O peixe fresco tem consistência:","Firme e elástica, sem marcas à pressão","Mole, deixa marcas à pressão","Friável","Viscosa","O avariado fica mole e deixa marcas."],
+["Pescado e ovos","As barreiras mecânicas do ovo contra a invasão microbiana são:","Casca, cutícula e membranas internas","Albumina e avidina","Riboflavina e biotina","Gema e clara","Albumina, riboflavina e avidina fazem parte das barreiras químicas."],
+["Pescado e ovos","A albumina com pH alto e pouco nitrogênio disponível, e a avidina ligada à biotina, são barreiras:","Químicas","Mecânicas","Físicas","Sensoriais","Deixam esses compostos indisponíveis para os microrganismos."],
+["Pescado e ovos","No teste da água, um ovo fresco:","Afunda e fica deitado no fundo","Boia na superfície","Boia com a ponta para baixo","Fica no meio do copo","O ovo velho e estragado tem muito ar e boia: não usar."],
+["Pescado e ovos","Pontos verdes na clara, fluorescentes sob luz ultravioleta, indicam deterioração por:","Pseudomonas fluorescens","Proteus spp.","Cladosporium","Sporotrichium","Proteus, Pseudomonas e Aeromonas se relacionam com pontos negros e escurecimento da gema."],
+["Pescado e ovos","A 'cabeça de alfinete' no ovo é:","Emboloramento no estágio inicial, pequeno e compacto, no interior da casca","Uma bactéria formadora de esporos","A bolsa de ar do ovo velho","Uma mancha de sangue coagulado","A cor depende da espécie do fungo."],
+["Pescado e ovos","Odor frutado e altamente ofensivo nos ovos é produzido por:","Pseudomonas, Alcaligenes e Acinetobacter","Proteus e Aeromonas","Sporotrichium e Cladosporium","Penicillium e Mucor","O odor pútrido, com H₂S e pressão de gás, vem da decomposição bacteriana."],
+["Pescado e ovos","Normalmente, a deterioração dos ovos é:","Mais bacteriana que fúngica","Exclusivamente fúngica","Só química","Sempre causada por vírus","Os fungos entram pelos poros ou rachaduras, principalmente com umidade alta."],
+/* --- Surtos --- */
+["Surtos","Qual fator contribui para o aumento das DTA, segundo a aula?","Urbanização desordenada e produção de alimentos em grande escala","Diminuição das populações","Redução do consumo de fast-foods","Menor circulação de pessoas entre países","Também contam grupos vulneráveis e controle deficiente da qualidade dos alimentos."],
+["Surtos","Qual foi o fator predisponente mais frequente nos surtos mostrados no gráfico?","Refrigeração inadequada (70,8%)","Mãos contaminadas (24,8%)","Preparo inadequado (22,3%)","Contaminação por roedores (1,4%)","A soma passa de 100% porque um surto pode ter mais de um fator."],
+["Surtos","Qual porcentagem as mãos contaminadas tiveram entre os fatores predisponentes?","24,8%","70,8%","4,6%","3,3%","Os três mais destacados foram refrigeração inadequada, mãos contaminadas e preparo inadequado."],
+["Surtos","Qual fator predisponente apareceu com a menor porcentagem?","Contaminação por roedores (1,4%)","Equipamentos inadequados (1,6%)","Má higiene (5,2%)","Utensílios contaminados (4,6%)","Equipamentos inadequados tiveram 1,6%."],
+["Surtos","VE-DTA é o:","Sistema de Vigilância Epidemiológica das Doenças Transmitidas por Alimentos","Sistema de Verificação de Embalagens de alimentos","Programa de vacinação contra DTA","Sistema de vigilância sanitária de estabelecimentos","Foi proposto por causa da falta de informações sobre a real dimensão do problema."],
+["Surtos","Por que é preciso estruturar o VE-DTA?","Pouco se conhece da real magnitude do problema, e o sistema pode detectar novos patógenos","Porque as DTA não existem no Brasil","Porque o problema já é totalmente conhecido","Porque as DTA só atingem adultos","As informações disponíveis são precárias."],
+["Surtos","Quais patógenos foram citados como exemplos de novos que o VE-DTA deve detectar?","E. coli O157:H7 e Salmonella typhimurium DT104","S. aureus e C. botulinum","Listeria monocytogenes e Bacillus cereus","Vibrio cholerae e Yersinia","São exemplos de introdução de novos patógenos."],
+["Surtos","As DTA podem se apresentar como:","Crônicas ou agudas, em surtos ou casos isolados, localizadas ou disseminadas","Apenas agudas e sempre em surto","Só casos isolados e localizados","Somente crônicas","A multiplicidade de agentes causais gera muitas possibilidades."],
+["Surtos","Qual NÃO faz parte das áreas que compõem o VE-DTA?","Publicidade e marketing de alimentos","Vigilância sanitária","Laboratório de saúde pública","Saneamento","Entram também vigilância epidemiológica e ambiental, defesa sanitária animal e vegetal, educação e assistência à saúde."],
+["Surtos","O aumento do consumo em fast-foods e em vias públicas:","Aumenta a exposição a alimentos de pronto consumo coletivo e contribui para o aumento das DTA","Reduz a incidência de DTA","Não tem influência nas DTA","Elimina a contaminação cruzada","Faz parte dos determinantes citados, junto com globalização e mudança de hábitos."]
+];
+
+/* ===== ABERTAS NOVAS ===== */
+var NO=[
+["Interesse","Descreva os três principais processos de deterioração por microrganismos (ranço, putrefação e azedamento), com o alimento e o agente de cada um.","Ranço: alimentos ricos em gordura; microrganismos lipolíticos, principalmente bactérias, quebram a gordura em ácidos graxos e glicerol. Putrefação: alimentos ricos em proteína, como as carnes; bactérias proteolíticas formam putrescina, cadaverina, H2S e NH3. Azedamento e coagulação: leite; bactérias do ácido lático transformam a lactose em ácido lático e outros ácidos."],
+["Interesse","Cite pelo menos cinco fontes de contaminação microbiana dos alimentos e explique o que elas refletem.","Solo e água, plantas, utensílios, trato intestinal de humanos e animais, vetores invertebrados e vertebrados, manipuladores, ar e poeira. Refletem condições precárias de higiene na produção, armazenamento, distribuição ou manuseio, seja no nível doméstico, comercial ou industrial."],
+["Interesse","Por que os microrganismos podem ser benéficos nos alimentos? Dê exemplos de bactérias, leveduras e fungos fermentadores e de seus produtos.","Eles transformam o alimento original em outro alimento, podendo ser mantidos no processo ou introduzidos de propósito. O mesmo microrganismo pode deteriorar um alimento e ser desejável em outro. Bactérias: iogurte, queijos, salame, picles (Lactobacillus faz ácido lático; Acetobacter faz vinagre). Leveduras: pão, cerveja e vinho (Saccharomyces). Fungos: queijos, champignon e shitake (Aspergillus niger faz ácido cítrico)."],
+["Indicadores","O que é um microrganismo indicador, quais características um bom indicador deve ter e para que ele é usado?","É um grupo ou espécie que reflete a qualidade microbiológica do alimento quanto à vida de prateleira ou à segurança. Deve ser de fácil e rápida detecção, fácil de diferenciar da microbiota, estar presente quando o patógeno está e ausente quando não está, e crescer de modo parecido com o patógeno. É usado para monitorar, detectar mudanças de qualidade, classificar e restringir o uso de águas ou alimentos."],
+["Indicadores","Diferencie coliformes totais, coliformes termotolerantes e E. coli, e diga o que cada contagem indica.","Coliformes totais: Enterobacteriaceae Gram-negativas que fermentam lactose com gás a 35 a 37 °C (Escherichia, Klebsiella, Citrobacter, Enterobacter); indicam condições higiênicas e falhas de limpeza, sanificação ou tratamento térmico. Termotolerantes: fermentam a 44 a 45,5 °C (Escherichia e algumas cepas de Enterobacter e Klebsiella); indicam contaminação fecal e possível presença de enteropatógenos. E. coli: habitat exclusivo do intestino, é o melhor indicador de contaminação fecal."],
+["Indicadores","Uma microempresa quer determinar a vida útil de um sanduíche de pão integral com molho de queijo e especiarias, tomate, alface e presunto. Que análises sugere, em que temperatura armazenar, o que fazer com poucos recursos e que modificação aumentaria a vida de prateleira?","Exemplo de resposta: análises microbiológicas (mesófilos, psicrotróficos, coliformes, bolores e leveduras, S. aureus e Salmonella) e análise sensorial, feitas em dias sucessivos de armazenamento. Armazenar sob refrigeração, abaixo de 10 °C e de preferência até 4 °C. Com poucos recursos, priorizar mesófilos, coliformes, bolores e leveduras e a análise sensorial. Para aumentar a vida de prateleira: embalagem adequada (atmosfera modificada ou vácuo), reduzir a atividade de água ou o pH do molho, e higiene rigorosa na produção para diminuir a contaminação inicial."],
+["Carne","Explique a diferença entre contaminação endógena e exógena da carne e cite fontes de contaminação nos matadouros.","Endógena: vem do animal vivo, quando bactérias intestinais invadem tecidos e órgãos pela corrente sanguínea. Exógena: vem depois do abate, por invasão post-mortem, e é a mais frequente. Fontes nos matadouros: peles e pelos com sujeira e fezes, ar e poeira, água de lavagem de carcaças, equipamentos e utensílios, mão de obra, transporte (ferimentos, contusões, animais sujos) e ambiente."],
+["Carne","Compare resfriamento e congelamento da carne: temperatura, vida útil, efeito sobre os microrganismos e alterações possíveis.","Resfriamento: logo após o abate, com ar frio a 4 a 7 °C e UR de 90 a 95% (vida útil de 7 dias) ou a -1,5 °C (3 a 4 semanas); inibe reações enzimáticas e freia o crescimento, mas crescem os psicrotróficos; alterações: perda de água da superfície, mudança de cor, ranço oxidativo, decomposição por psicrófilos e fungos, odores estranhos e contaminação óssea. Congelamento: depois do rigor e da refrigeração, com -10 °C na parte mais interna; a água congelada não fica disponível, mas cristais de gelo danificam a membrana; alterações: oxidação da gordura, dessecação, queimadura pelo frio, mudança de cor, perda de aroma e desnaturação de proteínas."],
+["Carne","Descreva as alterações da carne em aerobiose e em anaerobiose, com os microrganismos envolvidos.","Aerobiose: limosidade superficial (defeito) por Pseudomonas e Alcaligenes quando há muita água, e por micrococos e leveduras em produtos de menor Aa, como salsichas e linguiças; também odor anormal, bolores e manchas e descoloração pela mioglobina. Anaerobiose: bactérias aeróbias facultativas e anaeróbias crescem no interior da carne; ocorre acidificação (ácidos fórmico, acético e propiônico, com Clostridium butíricos e coliformes) e putrefação (decomposição das proteínas com H2S, putrescina e cadaverina, pelo gênero Clostridium)."],
+["Pescado e ovos","Descreva a deterioração do pescado: por que é rápida, a microbiota de águas frias e quentes, a parte mais suscetível e para que serve a reação de Éber.","É rápida pela composição química, por gorduras insaturadas facilmente oxidáveis e pH próximo da neutralidade, com autólise, alterações de aroma e cor e atividade bacteriana. Águas frias: psicrófilos (Pseudomonas, Alteromonas, Moraxella, Acinetobacter, Flavobacterium, Vibrio). Águas quentes: Gram-positivos mesófilos (Micrococcus e Bacillus). A parte mais suscetível é a região branquial, com mau odor das guelras. A reação de Éber avalia o frescor: o H2S da decomposição bacteriana reage com acetato de chumbo e forma sulfeto de chumbo (mancha preta no papel de filtro)."],
+["Pescado e ovos","Explique as barreiras de proteção do ovo contra microrganismos e como verificar sinais de deterioração.","Barreiras mecânicas: casca, cutícula e membranas internas. Barreiras químicas: albumina (pH alto e pouco nitrogênio disponível), ligação das proteínas com a riboflavina e da avidina com a biotina, que deixam esses compostos indisponíveis. Sinais: aparência geral, rachaduras, vazamentos, perda de frescor ou brilho, sujeira no exterior e sangue coagulado. No teste da água, o ovo fresco afunda e fica deitado, e o estragado boia."],
+["Pescado e ovos","Quais alterações de cor e odor os microrganismos causam nos ovos? Cite os agentes.","Cor: Pseudomonas fluorescens causa pontos verdes na clara, fluorescentes no ultravioleta; Pseudomonas, Acinetobacter, Alcaligenes e certos coliformes causam pontos coloridos na gema; Proteus, Pseudomonas e Aeromonas causam pontos negros e escurecimento da gema, com posterior desintegração. Odor: ausência de odor característico (P. fluorescens), odor frutado altamente ofensivo (Pseudomonas, Alcaligenes, Acinetobacter) e odor pútrido com H2S e pressão de gás."],
+["Surtos","Cite fatores que contribuem para o aumento das DTA no mundo.","Crescimento das populações, grupos populacionais vulneráveis ou mais expostos, urbanização desordenada, produção de alimentos em grande escala, controle deficiente da qualidade dos alimentos, maior consumo de fast-foods e de alimentos em vias públicas, novas formas de produção, mais aditivos, mudança de hábitos alimentares, mudanças ambientais, globalização e facilidade de deslocamento."],
+["Surtos","Quais foram os fatores predisponentes mais frequentes nos surtos de DTA mostrados na aula e o que eles indicam sobre a prevenção?","Refrigeração inadequada (70,8%), mãos contaminadas (24,8%) e preparo inadequado (22,3%), seguidos de instalações deficientes (7,4%) e má higiene (5,2%). Indicam que a maior parte dos surtos pode ser evitada com controle de temperatura, higiene das mãos e preparo correto, ou seja, com boas práticas."],
+["Surtos","O que é o VE-DTA, quais áreas o compõem e por que ele é importante?","É o Sistema de Vigilância Epidemiológica das Doenças Transmitidas por Alimentos. É composto por vigilância epidemiológica, sanitária e ambiental, defesa e inspeção sanitária animal e vegetal, laboratórios de saúde pública e de defesa sanitária animal e vegetal, educação em saúde, assistência à saúde e saneamento. É importante porque pouco se conhece da real magnitude das DTA e o sistema permite detectar a introdução de novos patógenos, como E. coli O157:H7 e Salmonella typhimurium DT104."]
+];
+
+var NC2=[
+/* --- Fermentação --- */
+["Fermentação","Fermentação é:","A degradação anaeróbia, geradora de energia, de um nutriente como a glicose, sem oxidação, que produz lactato, etanol e outros produtos simples","A degradação da glicose com oxigênio, formando CO₂ e água","A síntese de proteínas a partir de aminoácidos","A destruição de microrganismos pelo calor","É feita com as enzimas do citoplasma dos microrganismos."],
+["Fermentação","Na fermentação, a glicólise é a etapa em que:","A glicose é degradada em ácido pirúvico","O ácido pirúvico é reduzido","Se formam CO₂ e água","O mosto é pasteurizado","Depois vem a redução do ácido pirúvico, que leva aos produtos da fermentação."],
+["Fermentação","Na fermentação alcoólica, o ácido pirúvico origina:","Etanol e CO₂","Ácido lático","Ácido acético","Glicerol","Na fermentação lática, o ácido pirúvico origina ácido lático."],
+["Fermentação","Na produção de vinho, as uvas esmagadas são tratadas com compostos de enxofre para:","Inibir microrganismos competidores das leveduras","Aumentar a quantidade de etanol","Produzir CO₂","Dar cor ao vinho","Assim as leveduras fermentam sem concorrência."],
+["Fermentação","Por que a fermentação do vinho para quando o etanol chega perto de 12%?","Porque nessa concentração o etanol se torna tóxico para as leveduras","Porque o CO₂ acaba","Porque as leveduras viram bactérias","Porque o enxofre mata as leveduras","Antes disso, o CO₂ sai e o etanol vai aumentando."],
+["Fermentação","Qual microrganismo é usado na produção de cerveja e de pão?","Saccharomyces cerevisiae","Acetobacter","Lactobacillus bulgaricus","Aspergillus oryzae","A cerveja fermenta os açúcares do malte da cevada."],
+["Fermentação","No pão, o produto desejado da fermentação é:","O CO₂, que faz a massa crescer","O etanol","O ácido lático","O ácido acético","No forno, o calor evapora o etanol e mata as leveduras, interrompendo a fermentação."],
+["Fermentação","O vinagre é produzido por:","Bactérias (Acetobacter e Gluconobacter) que convertem o etanol em ácido acético","Leveduras que convertem lactose em ácido lático","Fungos que convertem amido em açúcar","Lactobacillus que convertem glicose em etanol","Serve qualquer bebida alcoólica, e o vinagre tem cerca de 4 a 14% de ácido acético."],
+["Fermentação","O iogurte é produzido por:","Lactobacillus bulgaricus e Streptococcus thermophilus, que produzem ácido lático a partir da lactose","Saccharomyces cerevisiae, que produz etanol","Acetobacter, que produz ácido acético","Penicillium roqueforti, que produz sabor azul","É uma fermentação lática, em cultura mista."],
+["Fermentação","O sabor característico dos queijos azuis vem da ação de:","Penicillium roqueforti","Pediococcus cerevisiae","Aspergillus oryzae","Rhizopus","O ácido lático das bactérias coagula as proteínas do leite, e fungos e outras bactérias dão o sabor."],
+["Fermentação","Os embutidos são produzidos por bactérias do ácido lático, em particular:","Pediococcus cerevisiae","Bacillus subtilis","Acetobacter","Mucor","É a fermentação de produtos cárneos."],
+["Fermentação","Qual par alimento e microrganismo está correto?","Natto e Bacillus subtilis","Tempeh e Mucor","Tofu e Rhizopus","Miso e Lactobacillus","Tempeh é Rhizopus, tofu é Mucor e miso é Aspergillus oryzae."],
+["Fermentação","Os grãos de kefir são:","Uma associação simbiótica de leveduras e bactérias láticas e acéticas","Colônias de um único fungo","Cristais de açúcar","Cápsulas de enzimas","Têm forma irregular, cor branca ou amarela e consistência elástica."],
+["Fermentação","SCOBY, na kombucha, significa:","Cultura simbiótica de bactérias e fungos","Substância de conservação de bebidas e yeast","Sistema de controle da fermentação de chás","Suco concentrado de bactérias e leveduras","Parte do SCOBY é usada para iniciar o próximo chá."],
+["Fermentação","Qual ácido orgânico predomina na kombucha?","Ácido acético","Ácido lático","Ácido cítrico","Ácido fosfórico","Há também tartárico, málico, glucônico e glucurônico."],
+["Fermentação","A película (biofilme) da kombucha é composta de:","Celulose, com beta-D-glicose ligada por ligações beta-1,4","Amido","Proteína","Gordura","Algumas cepas de acetobactérias produzem essa película polimérica."],
+["Fermentação","Em geral, a fermentação da kombucha dura cerca de:","7 a 14 dias","1 a 2 horas","24 horas","3 meses","É feita com chá adocicado a 18 a 28 °C."],
+/* --- Simbióticos --- */
+["Simbióticos","Alimento simbiótico é:","O produto que combina probióticos e prebióticos","O produto que só tem prebióticos","O produto sem microrganismos","Um antibiótico de amplo espectro","Atua sobre a microbiota intestinal para beneficiar a saúde."],
+["Simbióticos","Probiótico é:","Microrganismo vivo que melhora o equilíbrio microbiano intestinal e faz bem à saúde","Fibra não digerível que alimenta bactérias","Medicamento que mata bactérias","Toxina produzida por bactérias","A palavra vem do grego e significa 'para vida'."],
+["Simbióticos","Prebiótico é:","Ingrediente alimentar não digerível que estimula seletivamente o crescimento ou a atividade de bactérias benéficas do cólon","Bactéria viva que coloniza o intestino","Vitamina produzida pela microbiota","Enzima digestiva","É a definição da legislação brasileira."],
+["Simbióticos","Qual é exemplo de prebiótico?","Inulina e frutooligossacarídeos (FOS)","Lactobacillus acidophilus","Bifidobacterium bifidum","Streptococcus thermophilus","As três últimas opções são bactérias, ou seja, probióticos."],
+["Simbióticos","A atividade bifidogênica dos prebióticos:","Estimula as bifidobactérias, que suprimem bactérias putrefativas e inibem a E. coli","Elimina todas as bactérias do cólon","Aumenta a atividade das bactérias putrefativas","Impede a absorção de cálcio","Assim, as bactérias promotoras de saúde se tornam maioria."],
+["Simbióticos","Qual é um benefício dos prebióticos citado na aula?","Aumento da absorção de cálcio e diminuição do risco de câncer de cólon","Aumento da translocação bacteriana","Diminuição da massa fecal","Aumento da constipação","Também aumentam a massa fecal e a frequência de evacuação."],
+["Simbióticos","As fibras solúveis:","Dissolvem-se em água formando gel viscoso, o que aumenta a saciedade","Não absorvem água e aceleram o trânsito intestinal","Só existem no farelo de trigo","Não têm efeito sobre o colesterol","Também reduzem LDL, colesterol total e triglicerídeos e diminuem a absorção de glicose."],
+["Simbióticos","As fibras insolúveis:","Não absorvem água, aumentam o volume das fezes e estimulam os movimentos peristálticos","Formam gel viscoso no estômago","São digeridas e absorvidas no estômago","Reduzem o apetite pela viscosidade","Ajudam a combater a prisão de ventre."],
+["Simbióticos","A recomendação diária total de fibras é de:","25 g para mulheres adultas e 38 g para homens adultos","38 g para mulheres e 25 g para homens","10 g para ambos","60 g para ambos","Inclui fibras solúveis e insolúveis."],
+["Simbióticos","A dose de probiótico recomendada para adultos é de:","5 bilhões de UFC por dia, por pelo menos 5 dias","5 mil UFC uma única vez","100 mil UFC por semana","1 UFC por dia","Na prática, 2 a 3 iogurtes com culturas probióticas por dia, mas a concentração varia."],
+["Simbióticos","Para as crianças, o momento indicado para os probióticos é:","A instalação da microbiota do lactente, entre 18 e 24 meses","Somente depois dos 10 anos","Apenas no primeiro dia de vida","Somente na adolescência","Nessa fase a microbiota é mais simples, estável e muito influenciada pela nutrição."],
+["Simbióticos","Qual NÃO é uma característica desejada em um probiótico?","Sensibilidade ao ácido do estômago e à bile","Adesão às células da mucosa intestinal","Capacidade de colonização","Produção de substâncias antimicrobianas contra patógenos","Ele precisa resistir ao ácido estomacal, à bile e às enzimas pancreáticas."],
+["Simbióticos","Quais fatores provocam desequilíbrio da microbiota intestinal?","Alimentação desequilibrada, álcool, fumo, antibióticos, estresse e idade","Dieta rica em fibras e probióticos","Sono adequado e exercício","Consumo de iogurte","Também infecção bacteriana e fadiga."],
+["Simbióticos","Quais são benefícios dos probióticos citados na aula?","Proteção imunológica, saúde intestinal, prevenção de diarreia e melhor digestão da lactose","Aumento do colesterol","Destruição da microbiota normal","Piora da digestão da lactose","Também têm efeito anticarcinogênico e diminuem o colesterol."],
+["Simbióticos","Quantas bactérias vivem no intestino, aproximadamente?","100 trilhões, de mais de 400 espécies","100 mil, de 4 espécies","1 milhão, de 40 espécies","100 bilhões, de 4 mil espécies","Bifidobactérias e patógenos podem viver em equilíbrio."],
+["Simbióticos","Qual é exemplo de alimento simbiótico citado na aula?","Bebidas lácteas fermentadas","Açúcar refinado","Óleo vegetal","Sal","Também iogurtes, suplementos, fármacos e sucos de frutas e legumes fermentados."]
+];
+var NO2=[
+["Fermentação","Explique o que é fermentação e diferencie fermentação lática, alcoólica e acética, com um produto de cada.","Fermentação é a degradação anaeróbia, geradora de energia, de um nutriente como a glicose, sem oxidação, com produção de lactato, etanol e outros produtos simples. Começa na glicólise (glicose em ácido pirúvico) e segue com a redução do ácido pirúvico. Lática: forma ácido lático (iogurte e queijo). Alcoólica: forma etanol e CO2 (vinho, cerveja e pão). Acética: bactérias convertem o etanol em ácido acético (vinagre)."],
+["Fermentação","Descreva a produção do pão: microrganismo, o que acontece com o amido, qual produto é desejado e o que ocorre no forno.","Usa-se Saccharomyces cerevisiae, a cerca de 27 °C. O amido é hidrolisado em açúcares simples, e as leveduras formam CO2 e etanol. O produto desejado é o gás (CO2), que faz a massa crescer. No forno, o calor evapora o etanol e mata as leveduras, interrompendo a fermentação."],
+["Fermentação","O que é kombucha? Descreva os microrganismos, o tempo de fermentação, as substâncias formadas e o que é o SCOBY.","É um chá adocicado fermentado por 7 a 14 dias, por atividade conjunta e simbiótica de fungos e bactérias (fermentação lática, acética e alcoólica). Dominam as bactérias do ácido acético (principalmente Acetobacter) e leveduras osmofílicas. Formam-se ácidos orgânicos (a maior parte acético, além de tartárico, málico, glucônico e glucurônico), pouco etanol, compostos fenólicos e CO2. O SCOBY é a cultura simbiótica de bactérias e fungos, com a película de celulose, e parte dele inicia o próximo chá."],
+["Simbióticos","Diferencie probióticos, prebióticos e simbióticos, com exemplos.","Probióticos são microrganismos vivos que melhoram o equilíbrio da microbiota intestinal (Lactobacillus acidophilus, Bifidobacterium bifidum). Prebióticos são ingredientes alimentares não digeríveis que estimulam seletivamente bactérias benéficas do cólon (inulina, FOS, fibras). Simbióticos combinam os dois (iogurtes, bebidas lácteas fermentadas, suplementos, sucos fermentados)."],
+["Simbióticos","Compare fibras solúveis e insolúveis: o que fazem no intestino, benefícios e fontes.","Solúveis: dissolvem em água e formam gel viscoso, dão saciedade, hidratam o bolo fecal, reduzem LDL, colesterol e triglicerídeos, diminuem a absorção de glicose e alimentam bactérias boas; fontes: frutas, cereais, legumes, aveia, feijão. Insolúveis: não absorvem água, aumentam o volume das fezes e estimulam os movimentos peristálticos, combatem a prisão de ventre e previnem hemorroidas e câncer de cólon; fontes: farelo de trigo, arroz integral, feijão, cereais integrais, pera, ameixa com casca. Recomendação total: 25 g (mulheres) e 38 g (homens)."],
+["Simbióticos","Quais características um probiótico deve ter e quais são seus benefícios? Cite a dose recomendada para adultos.","Deve resistir ao ácido do estômago, à bile e às enzimas pancreáticas, aderir às células da mucosa, colonizar, produzir substâncias antimicrobianas contra patógenos e não sofrer translocação. Benefícios: proteção imunológica, saúde intestinal, efeito anticarcinogênico, redução do colesterol, tratamento e prevenção de diarreia e melhor digestão da lactose. Dose para adultos: 5 bilhões de UFC por dia, por pelo menos 5 dias, o que equivale a 2 a 3 iogurtes com probióticos por dia."]
+];
+C=C.concat(NC);O=O.concat(NO);C=C.concat(NC2);O=O.concat(NO2);
+var $=function(i){return document.getElementById(i)};
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x)e.textContent=x;return e}
+// abas
+document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){
+document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
+document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===b.dataset.v)});
+if(b.dataset.v==='res')volta();if(b.dataset.v==='sim')lista();window.scrollTo(0,0)}});
+
+// home: lista de assuntos
+var T=[["hist","História e segurança alimentar","Da caça e coleta à agricultura no Neolítico, FAO e as 4 dimensões da segurança alimentar."],
+["ods","ODS 2 e ODS 12","Fome zero e consumo e produção sustentáveis: metas até 2030."],
+["shelf","Shelf life","Prazo de validade: análise sensorial x microbiológica e regras do rótulo."],
+["intr","Fatores intrínsecos","Do alimento: Aa, pH, potencial redox, nutrientes e antimicrobianos naturais."],
+["extr","Fatores extrínsecos","Do ambiente: temperatura, oxigênio, umidade, gases e teoria dos obstáculos."],
+["interesse","Microrganismos de interesse","Deteriorantes, patogênicos, benéficos e indicadores; ranço, putrefação e fermentadores."],
+["det","Deteriorantes x patogênicos","Quem estraga o alimento e quem se disfarça."],
+["perigo","Perigos","Biológico, químico e físico, e contaminação cruzada."],
+["dta","DTA","Infecção, intoxicação, toxinfecção e as 4 etapas."],
+["surto","Surtos de DTA e vigilância","Por que os surtos acontecem, porcentagens e o VE-DTA."],
+["indic","Microrganismos indicadores","Coliformes, E. coli, mesófilos, bolores e leveduras e o que cada um indica."],
+["micro","Análise microbiológica","Parâmetros da Anvisa, meios de cultura, DNA e curva de crescimento."],
+["carne","Microbiologia da carne","Contaminação, bactérias principais, alterações e conservação pelo frio."],
+["pesc","Pescado e ovos","Deterioração, frescor do peixe, barreiras do ovo e alterações de cor e odor."],
+["ferm","Fermentação e alimentos fermentados","Lática, alcoólica e acética; vinho, pão, iogurte, queijo, kefir e kombucha."],
+["simb","Probióticos, prebióticos e simbióticos","Saúde intestinal, fibras solúveis e insolúveis, doses e características dos probióticos."]];
+function abre(id){$('home').style.display='none';$('topics').classList.add('on');$('back').classList.add('on');
+document.querySelectorAll('#topics section').forEach(function(x){x.classList.toggle('on',x.id===id)});window.scrollTo(0,0)}
+function volta(){$('home').style.display='block';$('topics').classList.remove('on');$('back').classList.remove('on');window.scrollTo(0,0)}
+T.forEach(function(t){var b=el('button','card');var d=el('div');d.appendChild(el('b','',t[1]));d.appendChild(el('span','',t[2]));
+b.appendChild(d);b.appendChild(el('em','','›'));b.onclick=function(){abre(t[0])};$('home').appendChild(b)});
+$('back').onclick=volta;
+// simulados
+var S=[["Prova","Simulado Prova","Todos os assuntos misturados"],
+["História","Simulado História","Neolítico, segurança alimentar e FAO"],
+["ODS","Simulado ODS 2 e 12","Fome zero e consumo sustentável"],
+["Shelf life","Simulado Shelf life","Validade e análises sensorial e microbiológica"],
+["Intrínsecos","Simulado Fatores intrínsecos","Aa, pH, potencial redox e nutrientes"],
+["Extrínsecos","Simulado Fatores extrínsecos","Temperatura, oxigênio, umidade e gases"],
+["Interesse","Simulado Microrganismos de interesse","Deterioração, benéficos e fontes de contaminação"],
+["Deteriorantes","Simulado Deteriorantes","Deteriorantes x patogênicos e enlatados"],
+["Perigos","Simulado Perigos","Biológico, químico e físico"],
+["DTA","Simulado DTA","Tipos de DTA e as 4 etapas"],
+["Surtos","Simulado Surtos de DTA","Fatores predisponentes e VE-DTA"],
+["Indicadores","Simulado Indicadores","Coliformes, E. coli e outros indicadores"],
+["Análise micro","Simulado Análise micro","Parâmetros, meios de cultura e DNA"],
+["Carne","Simulado Carne","Contaminação, alterações e conservação"],
+["Pescado e ovos","Simulado Pescado e ovos","Frescor, barreiras e alterações"],
+["Fermentação","Simulado Fermentação","Fermentados, vinho, pão, iogurte, kefir e kombucha"],
+["Simbióticos","Simulado Simbióticos","Probióticos, prebióticos e fibras"]];
+var cur,done,hit;
+S.forEach(function(t){var b=el('button','card'+(t[0]==='Prova'?' pr':''));var d=el('div');d.appendChild(el('b','',t[1]));d.appendChild(el('span','',t[2]));
+b.appendChild(d);b.appendChild(el('em','','›'));b.onclick=function(){start(t)};$('scards').appendChild(b)});
+function upd(){$('score').textContent=done<10?hit+' acertos · '+done+' / 10 respondidas':'Fim! Você acertou '+hit+' de 10.'}
+function fim(){done++;upd()}
+function start(t){cur=t;$('shome').style.display='none';$('run').style.display='block';$('stitle').textContent=t[1];
+var pc=t[0]==='Prova'?C:C.filter(function(q){return q[0]===t[0]}),po=t[0]==='Prova'?O:O.filter(function(q){return q[0]===t[0]});
+var l=$('slist');l.innerHTML='';done=0;hit=0;upd();var n=0;
+sh(pc).slice(0,8).forEach(function(q){n++;var d=el('div','q');d.appendChild(el('span','tag',q[0]+' · fechada'));d.appendChild(el('p','',n+'. '+q[1]));
+var sm=el('small');
+sh([0,1,2,3]).forEach(function(k){var o=el('button','o',q[2+k]);o.onclick=function(){
+d.querySelectorAll('.o').forEach(function(x){x.disabled=true;if(x.textContent===q[2])x.classList.add('right')});
+if(o.textContent===q[2])hit++;else o.classList.add('wrong');sm.textContent=q[6];fim()};d.appendChild(o)});
+d.appendChild(sm);l.appendChild(d)});
+sh(po).slice(0,2).forEach(function(q){n++;var d=el('div','q');d.appendChild(el('span','tag',q[0]+' · aberta'));d.appendChild(el('p','',n+'. '+q[1]));
+var ta=document.createElement('textarea');ta.placeholder='Escreva sua resposta';d.appendChild(ta);
+var b=el('button','btn','Ver gabarito');var box=el('div');
+b.onclick=function(){b.remove();box.appendChild(el('div','gab','Gabarito: '+q[2]));
+var y=el('button','btn g','Acertei'),x=el('button','btn r','Errei');
+function f(v){y.remove();x.remove();if(v)hit++;fim()}y.onclick=function(){f(1)};x.onclick=function(){f(0)};box.appendChild(y);box.appendChild(x)};
+d.appendChild(b);d.appendChild(box);l.appendChild(d)});
+window.scrollTo(0,0)}
+function lista(){$('run').style.display='none';$('shome').style.display='block';window.scrollTo(0,0)}
+$('sback').onclick=lista;$('nsim').onclick=function(){start(cur)};
+</script>
+</body>
+</html>
